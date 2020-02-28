@@ -1,0 +1,102 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>契約管理</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button [routerLink]="backURL" defaultHref="{{backURL}}"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="div_content">
+        <div class="div_main">
+            <div class="div_header">
+                <div class="div_search">
+                    <ion-label  position="stacked">顧客</ion-label>       
+                    <ion-select [disabled]="disable_search" class="sel_customer" [class.seldisabled]="disable_search"  [(ngModel)]= "customer_id" placeholder="顧客の選択"> 
+                        <ion-select-option  *ngFor="let customer of customers" value="{{customer.id}}">{{customer.name}}</ion-select-option>                                         
+                    </ion-select>  
+                </div>
+                <div class="div_actionicon">
+                    <ion-button [disabled]="disable_search"  class="btni_action" fill="solid" color="light"  (click)="execGetContract()">
+                        <ion-icon slot="icon-only" name="search"></ion-icon>
+                    </ion-button>
+                    <ion-button  [disabled]="!disable_search" class="btni_action" fill="solid" color="light"  (click)="enableSearch()">
+                        <ion-icon slot="icon-only"  name="refresh"></ion-icon>
+                    </ion-button>
+                </div>
+            </div>    
+            <div id="change_form" class="div_formbody">
+                <ion-label class="lbl_title">契約の追加または更新</ion-label> 
+                <div class="div_form">     
+                    <ion-item class="input_item" > 
+                        <ion-label  position="stacked">プロバイダの選択</ion-label>       
+                        <ion-select class="input_custom0" [(ngModel)]="sel_provider" (ionChange)="typeChange()" placeholder="顧客の選択"> 
+                            <ion-select-option  *ngFor="let provider of providers" value="{{provider.id}}">{{provider.name}}</ion-select-option>                                         
+                        </ion-select>  
+                    </ion-item>  
+                    <ion-item class="input_item"> 
+                        <ion-label  position="stacked">関連区分</ion-label>       
+                        <ion-select class="input_custom0" [(ngModel)]="sel_contract_type" placeholder="契約タイプの選択"> 
+                            <ion-select-option  *ngFor="let type of contract_type" value="{{type.value}}">{{type.name}}</ion-select-option>                                         
+                        </ion-select>  
+                    </ion-item>    
+                    <ion-item class="input_item">             
+                        <ion-label class="inputl_lblcustom1">納入コード</ion-label>
+                        <ion-input class="input_custom1 input_custom0"  [(ngModel)]="vendor_code"  type="text"></ion-input>
+                    </ion-item>
+                    <ion-item class="input_item">          
+                        <ion-label class="inputl_lblcustom1">代納コード</ion-label>
+                        <ion-input  class="input_custom1 input_custom0" [(ngModel)]="subvendor_code" type="text"></ion-input>
+                    </ion-item>
+                    <ion-item  class="input_item">     
+                        <ion-label class="inputl_lblcustom1">契約期限</ion-label>
+                        <ion-input  class="input_custom1 input_custom0" [(ngModel)]="expires" type="text"></ion-input>
+                    </ion-item>                     
+                </div>
+            </div> 
+            <div>
+                <ion-button  class="btn_action" fill="solid"  [hidden]="!hide_change_form" [disabled]="!disable_search" (click)="changeForm()">
+                    <ion-icon slot="start"  name="settings"></ion-icon>変更
+                </ion-button>
+                <ion-button  class="btn_action" fill="solid"  [hidden]="hide_change_form"  (click)="changeForm()">
+                    <ion-icon slot="start"  name="close-circle"></ion-icon>解約
+                    </ion-button>
+                <ion-button  class="btn_action" fill="solid" color="success"  [hidden]="hide_change_form" (click)="execContractChange()">
+                    <ion-icon slot="start"  name="save"></ion-icon>契約を保存する
+                </ion-button>
+            </div>
+            <div class="div_tblcontent">
+                <table mat-table [dataSource]="dataSource">
+                    <ng-container matColumnDef="provider_name">
+                        <th mat-header-cell *matHeaderCellDef class="custom_header">プロバイダー</th>
+                        <td mat-cell *matCellDef="let element" style="text-align: left;">{{element.name}}</td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="contract_type">
+                        <th mat-header-cell *matHeaderCellDef class="custom_header">契約タイプ</th>
+                        <td mat-cell *matCellDef="let element"> {{element.customer_type}} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="vendor_code">
+                        <th mat-header-cell *matHeaderCellDef class="custom_header">仕入先コード</th>
+                        <td mat-cell *matCellDef="let element"> {{element.vendor_code}} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="subvendor_code">
+                        <th mat-header-cell *matHeaderCellDef class="custom_header">サブベンダー コード</th>
+                        <td mat-cell *matCellDef="let element"> {{element.subvendor_code}} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="expires">
+                        <th mat-header-cell *matHeaderCellDef class="custom_header">有効 期限</th>
+                        <td mat-cell *matCellDef="let element"> {{element.expires}} </td>
+                    </ng-container>
+                    
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"  class="tbl_header"></tr>
+                    <br>    
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.active]="row.id == selectedRowID"></tr>          
+                </table>
+            </div>       
+        </div> 
+    </div>
+</ion-content>

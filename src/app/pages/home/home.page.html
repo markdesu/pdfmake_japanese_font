@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar > 
+    <ion-buttons slot="start">     
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  class="iontool2">
+  <!-- <div  [hidden]= "authguard.isAuthenticated"> -->
+      <ion-card class="cd_home">  
+          <ion-card-header>
+              <ion-card-subtitle>始める</ion-card-subtitle>
+              <ion-card-title>  出荷アプリへようこそ  <img class="img_home" src="assets/img/banner2.png"></ion-card-title>
+          </ion-card-header>
+            <ion-card-content>
+               <p>
+                Shipping.netと統合され、出荷アプリは、計量の詳細の簡単なエンコーディングと表示を提供しています。<br>出荷ヤード操作用に設計されています。
+               </p>
+            </ion-card-content>
+            <ion-button fill="clear"> <ion-icon name="document" slot="start"></ion-icon> <a style="text-decoration: none;"href="/assets/pdfviewer.html" target="_blank">ユーザーズマニュアル</a>  </ion-button>     
+            <ion-button fill="clear"  routerLink="/inspection/login"  [hidden]="authguard.isAuthenticated" > <ion-icon name="clipboard" slot="start"></ion-icon>ヤード検査サービス</ion-button>
+            <!-- <ion-button fill="clear"  routerLink="/login"  [hidden]="authguard.isAuthenticated" > <ion-icon name="clipboard" slot="start"></ion-icon>レポート サービス ログイン</ion-button> -->
+            <ion-button fill="clear"  routerLink="/weighing" *ngIf="authguard.user_type == 'admin'"> <ion-icon name="cube" slot="start" ></ion-icon>管理用実績集計</ion-button>
+            <ion-button fill="clear" routerLink="/qrscanner"> <ion-icon name="qr-scanner" slot="start"></ion-icon>QR スキャンを開始</ion-button>          
+      </ion-card>
+  <!-- </div> -->
+  <!-- <div  [hidden]= "!authguard.isAuthenticated">
+          <p>
+          Shipping.netと統合され、出荷アプリは、計量の詳細の簡単なエンコーディングと表示を提供しています。<br>出荷ヤード操作用に設計されています。
+         </p>
+         
+         
+         <div>
+           
+         </div>
+    
+  </div> -->
+  
+</ion-content>
+
+
+
+<!--.............. Comment Area Below ............. -->
+
+
+<!-- 計量レコードの表示  filing-->
+<!-- no-border-bottom no-border-top no-border -->
+<!-- <ion-title>ホームページ</ion-title> -->
+<!-- routerLink="/manual" -->
+<!-- <a href="/assets/sample.html">pdf link</a> -->
+<!-- <p>Integrated with Shipping.net, Shipping App offers an easy encoding and display of Weighing details.<br> Designed for shipping yard operations.</p>-->
+
+<!-- <ion-footer>
+  <ion-toolbar>
+    <ion-title class="footer_title">日光ソフトウェアを搭載</ion-title>
+  </ion-toolbar>
+</ion-footer> -->

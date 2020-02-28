@@ -9,3 +9,151 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+
+html,
+body {
+    height: 100% !important;
+}
+
+.myapp-no-padding-dialog .mat-dialog-container {
+  padding: 0;
+}
+.split-pane-visible > ion-menu {
+    max-width: 250px!important;
+}
+
+ion-split-pane{ 
+     --border: none !important;
+     --height: 100%;
+    ion-menu{
+     --background: #213347 !important; 
+     
+        ion-content{            
+         --background: #1e2e41 !important; 
+            ion-list-header{   
+              --color: #FFFFFF !important;             
+            }
+            ion-item{
+              padding-left:10px !important;
+              --background: #1e2e41 !important; 
+                 ion-icon{ 
+                   padding:0;
+                  color: #b1b7bd !important;       
+                  }
+                --font-size:  15px !important;
+                 --color: #b1b7bd !important;         
+            }
+            ion-item:hover{
+           
+              --background: #304257 !important; 
+                
+            }
+            
+            
+        }
+        ion-toolbar{
+            --background: #0a1f36 !important; 
+             --color: #FFFFFF !important;      
+        
+        }
+    }
+ }
+      
+ion-toolbar{
+    --color: #FFFFFF;
+    --background: none !important;
+      background-image: url('assets/img/toolbar_bg6.png') !important;
+      background-position: center center !important;
+      background-repeat: no-repeat !important;
+      background-size: cover !important;
+}
+
+  
+.alertDanger{
+  .alert-title {
+    color: red !important;// text color for confirm alerts
+  }
+  
+}
+
+.alertDangerbtn {
+    color: red !important;
+}
+
+.alertNotice {
+  .alert-title {
+    color: rgb(61, 61, 61) !important;// text color for confirm alerts
+  }
+}
+
+.alertSuccess {
+    .alert-title {
+      color: green !important;// text color for confirm alerts
+    }
+}
+
+.custom_matdialog {
+  mat-dialog-container {
+    padding: 0;
+  }
+}
+
+.sidebar_footer {
+  padding: 15px;
+  padding-left: 20px;
+  height: 85px;
+  color: #ffffff;
+  border-top: solid 1px #d3d3d3; 
+  background: #262c33 !important; 
+  // background: #0a1f36 !important; 
+  
+    ion-icon{ 
+    vertical-align: middle;
+      font-size: 20px;
+      margin-right: 10px !important;
+    }
+    label{
+      vertical-align: top;
+    }
+}
+
+.logout_icon {
+  float: right;
+  cursor: pointer;
+}
+
+.logout_icon:hover {
+  color: #d3dce6 !important;       
+  
+}
+
+ion-item.active {
+      color: #ffffff !important;
+      font-weight: 500 !important;
+    ion-icon{
+      color: #ffffff !important;
+    }
+}
+
+.active-parent {
+  color: #a6d4ff !important;
+  font-weight: 500 !important;
+}
+
+.sub-item {
+  padding-left: 80px !important;
+  font-size: 14px;
+
+}
+
+
+// <!--.............. Comment Area Below ............. -->
+
+// --background: url('assets/img/login_bg4.png') no-repeat ;
+// --background-size: cover;
+
+    // #071627 dark
+    // #0e1f27 lighter
+    // #263d58 orig

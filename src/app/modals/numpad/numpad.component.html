@@ -1,0 +1,29 @@
+<div class="content"> 
+    <div>
+        <div class="div_title">
+            <b class="title">{{data.title}}</b>
+        </div>
+        <br>
+        <div class="div_val">
+            <b class="value">{{value}}</b>
+        </div>
+        <br>
+        <button mat-stroked-button (click)="typeInput('7')">7</button> 
+        <button mat-stroked-button (click)="typeInput('8')">8</button>  
+        <button mat-stroked-button (click)="typeInput('9')">9</button> 
+        <br>
+        <button mat-stroked-button (click)="typeInput('4')">4</button> 
+        <button mat-stroked-button (click)="typeInput('5')">5</button>  
+        <button mat-stroked-button (click)="typeInput('6')">6</button> 
+        <br>
+        <button mat-stroked-button (click)="typeInput('1')">1</button> 
+        <button mat-stroked-button (click)="typeInput('2')">2</button>  
+        <button mat-stroked-button (click)="typeInput('3')">3</button>
+        <br>
+        <button mat-stroked-button (click)="typeInput('0')">0</button> 
+        <button mat-stroked-button (click)="typeInput('.')">.</button>
+        <button mat-stroked-button (click)="typeInput('b')"><ion-icon name="backspace"></ion-icon></button>  
+    </div>
+    <br>
+    <ion-button   id="btn-confirm"   expand="block" color="success" (click)="save()">確認 </ion-button>
+</div>

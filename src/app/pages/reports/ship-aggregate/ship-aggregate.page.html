@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>船別の集計</ion-title>
+        <ion-buttons slot="start">
+              <ion-back-button defaultHref="/generate-report"></ion-back-button>
+          </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+<div class="div_content">
+    <div class="div_resultmenu">
+        <label class="lbl_param"><b>日付範囲: </b> {{from_date}} - {{to_date}}</label>
+        <br>
+        <label class="lbl_param"><b>納入業者: </b> {{vendor_name}}</label>
+        <br>
+        <label class="lbl_result">{{lblResult}}</label>
+        <ion-button  class="btn_download" fill="outline" [hidden]="hide_btndl" size="small" (click)="downloadCSV()" > <ion-icon name="download" slot="start"></ion-icon>このデータを CSV で保存</ion-button>     
+        <div class="div_toggle">
+            <label class="lbl_show">合計のみ表示 </label>
+            <ion-toggle [(ngModel)]="total_only"></ion-toggle>
+        </div>
+    </div>
+    <div class="div_tblcont">
+        <table class="tbl_result" border="1">  
+            <thead>
+            <tr>         
+                <th>船名 No./名 </th>      <!-- Ship -->             
+                <th>ハッチ名</th>          <!-- Hatch -->
+                <th>グループ No./名</th>   <!-- Group -->  
+                <th>正味重量</th>          <!-- Net Weight -->  
+                <th>品 No./名</th>        <!-- Product -->  
+                <th>検収重量</th>         <!-- Inspection Weight -->  
+                <th>台数</th>            <!-- Number -->                            
+            </tr>
+            </thead>
+            <tbody>
+                
+            <ng-container  *ngFor="let ship of custom_result" border="1">
+                <tr style="border-bottom: none;">
+                    <td class="td_sub" colspan="14"><label class="lbl_double">{{ship.ship_code}} </label> {{ship.ship_name}}</td>
+                </tr>
+                <ng-container *ngFor="let hatch of ship.details">          
+                    <ng-container *ngFor="let group of hatch.details; let xlast = last">
+                        <tr [hidden]="total_only" class="tr_group" border="1" *ngFor="let item of group.group_details; let first = first; let last = last" >
+                                <td  class="td_mid" ></td>
+                                <td  [class.td_mid]="last === false" *ngIf="!last"></td>
+                                <td  [class.td_mid]="last === false" *ngIf="!last"></td>
+                                <td  [class.td_last]="last === true" [class.td_mid]="last === false" *ngIf="!xlast || !last"></td>
+                                
+                              
+                                <td  class="td_last" *ngIf="last && xlast">{{hatch.hatch_name}} </td>       
+                                <td  class="td_last td_lbltotal" *ngIf="last"><label class="lbl_double">{{group.group_code}} </label> {{group.group_name}}</td>                            
+                                <td  class="td_last td_numbers" *ngIf="last">{{group.net_weight | number}}</td>
+                                
+                                <td class="td_lbltotal" [class.td_last]="last === true" [class.td_mid]="last === false"><label class="lbl_double">{{item.item_code}} </label> {{item.item_name}}</td>   
+                                <td [class.td_last]="last === true" [class.td_mid]="last === false">{{item.weight | number}}</td> 
+                                <td [class.td_last]="last === true" [class.td_mid]="last === false" style="border-right:solid 1px black"></td>
+                        </tr>                         
+                    </ng-container>
+                </ng-container>
+                <!-- -->
+                <tr class="tr_subvTotal">     
+                    <td  class="td_lbltotal" colspan="3">船別計</td>
+                        <td class="td_numbers">{{ship.net_weight | number}}</td>
+                        <td></td>
+                        <td>{{ship.weight | number}}</td>
+                        <td style="border-right:solid 1px black">{{ship.counter}}</td>
+                    </tr>
+            </ng-container>
+            <tr class="td_total">
+                <td colspan="3" class="td_lbltotal">総合計</td>
+                <td class="td_numbers">{{ntotal | number}}</td>
+                <td></td>
+                <td>{{wtotal | number}}</td>
+                <td></td>
+            </tr> 
+        </tbody>
+            
+        </table>
+    </div>
+</div>  
+</ion-content>
+ 
+
+        <!-- <tr [hidden]="total_only" *ngFor="let detail of ship.details">
+                    <td class="td1"></td>
+                    <td>{{detail.hatch_no}}</td> 
+                    <td style="text-align:left"><label class="lbl_double">{{detail.group_code}}</label>{{detail.group_name}}</td>
+                    <td>{{detail.net_weight}}</td>
+                    <td style="text-align:left"><label class="lbl_double">{{detail.item_code}}</label> {{detail.item_name}}</td>
+                    <td>{{detail.weight}}</td>
+                    <td></td>
+                </tr>  
+                
+                
+                               
+              <tr  *ngFor="let ds of detail.group_details">
+                    <td>asdasd</td>
+                    <td>{{ds.item_name}}</td>  
+                </!--> 
+                <!-- <tr>
+                    aasdas
+                </tr> -->

@@ -1,0 +1,78 @@
+<ion-header class="login_header" [hidden]="hideHeader" >
+  <ion-toolbar class="login_toolbar">
+    <ion-title class="title" (click)="redirect()">船積みネット</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="login_content">
+            <ion-card  class="login_card" [hidden]="!MobileBrowser">
+                <ion-card-header class="login_card_header">
+                        <div style="text-align: center; width: 100%; margin: 10px auto;"  (click)="redirect()">
+                                <img style="width: auto ; height: 50px; margin: 5px auto;" src="/assets/icon/inspector.png" >
+                                <label style="font-size: 20px; color : white">検査官ログインサービス</label>
+                        </div>
+                </ion-card-header>
+                <ion-card-content class="card_content">
+                        <div style="min-height: 50px; text-align: center;">
+                                <b class="login_status" >{{loginStatus}}</b>
+                        </div>
+                        <form name="form2" (ngSubmit)="loginUser()">
+                            <div class="custom_div">
+                                <ion-item>
+                                    <ion-label position="floating">ログインID</ion-label>
+                                    <ion-input type="text"  [(ngModel)]="username" name="username"></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating">パスワード</ion-label>
+                                    <ion-input type="password"  [(ngModel)]="password" name="password" ></ion-input>
+                                </ion-item>
+                            </div>
+                           <br>
+                            <div margin-vertical text-center>
+                                <button  type="submit" hidden></button>    
+                                <ion-button ion-button id="btn-confirm" expand="block" color="light" (click)="loginUser()">
+                                        <ion-icon name="unlock" slot="start">
+                                        </ion-icon><b>ログイン</b>
+                                </ion-button>
+                            </div>
+                        </form> 
+                </ion-card-content>
+            </ion-card>       
+            <ion-card  class="login_card2" [hidden]="MobileBrowser">
+                <div  class="card2_div">                      
+                    <div class="card2_div1"></div>
+                    <div  class="card2_div2">
+                        <div style="min-height: 50px;">
+                            <b class="login_status" >{{loginStatus}}</b>
+                        </div>
+                            
+                        <form name="form2" (ngSubmit)="loginUser()">
+                            <ion-item color="transparent">
+                                <ion-label position="floating">ログインID</ion-label>
+                                <ion-input type="text"  [(ngModel)]="username" name="username"></ion-input>
+                            </ion-item>
+                            <ion-item color="transparent">
+                                <ion-label position="floating">パスワード</ion-label>
+                                <ion-input type="password"  [(ngModel)]="password" name="password" ></ion-input>
+                            </ion-item>
+                            <br>
+                            <div margin-vertical text-center>
+                                <button  type="submit" hidden></button> 
+                                
+                                <ion-button ion-button id="btn-confirm" expand="block" color="light" (click)="loginUser()">
+                                        <ion-icon name="unlock" slot="start">
+                                        </ion-icon><b>ログイン</b>
+                                </ion-button>
+                            </div>
+                        </form> 
+                    </div>    
+                </div>
+            </ion-card>    
+    </div>
+</ion-content>
+
+<ion-footer>
+       <div class="div_footer">
+            <ion-title class="footer_title">日光ソフトウェアを搭載</ion-title>
+       </div>
+</ion-footer> 

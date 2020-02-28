@@ -1,0 +1,48 @@
+<div class="dialog">
+    <div class="div_title">
+        <label class="lbl_title" >新しい顧客の追加</label>  
+        <ion-button  class="btn_close" fill="clear"    color="light" (click)="close()" >
+                <ion-icon name="close-circle" slot="icon-only"></ion-icon>
+        </ion-button>  
+    </div>
+      
+    <div class="div_create">   
+        <div id="create" class="div_form">  
+            <div class="div_status" [hidden]="hide_error">
+                <label  class="success_status">{{error_status}}</label>                              
+            </div>  
+           
+            <ion-item>
+                <ion-label position="stacked">社名</ion-label>
+                <ion-input type="text" [(ngModel)]="create_data.name"></ion-input>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label position="stacked">住所</ion-label>
+                <ion-input type="text"  [(ngModel)]="create_data.address"></ion-input>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label position="stacked">電話</ion-label>
+                <ion-input type="text" [(ngModel)]="create_data.phone"></ion-input>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label position="stacked">FAX</ion-label>
+                <ion-input type="text"  [(ngModel)]="create_data.fax"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">備考</ion-label>
+         
+                <ion-textarea type="text" [(ngModel)]="create_data.remark"></ion-textarea>
+            </ion-item>
+            
+            <div margin-vertical text-center>
+                <ion-button   id="btn-confirm"   (click)="createCustomer()">
+                    <ion-icon name="save" slot="start"></ion-icon>新しい顧客を保存
+                </ion-button>
+            </div>          
+        </div>    
+    </div>
+</div>

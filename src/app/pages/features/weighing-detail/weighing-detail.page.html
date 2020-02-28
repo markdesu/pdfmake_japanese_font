@@ -1,0 +1,142 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+            <ion-back-button [routerLink]="backURL" defaultHref="{{backURL}}"></ion-back-button>
+          <!-- <ion-menu-button></ion-menu-button> -->
+        </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+<!-- <div class="div_main"> -->
+    <div class="div_error" [hidden]="Hid_div_error">
+        <ion-card class="cont_card2">
+            エラー！無効なコードです。
+        </ion-card>
+    </div>
+    <div class="div_cont1" [hidden]="Hid_main_content">
+        <ion-button class="btn_nav" fill="clear" size="small" (click)="presentLoading('prev')" [disabled]="dis_btn_prev">
+            <ion-icon size="large" class="inc_nav" slot="icon-only"  name="arrow-dropleft"></ion-icon>
+        </ion-button>                 
+        <ion-label class="lbl_weighing">ID: {{weighingID}}</ion-label>
+        <ion-button class="btn_nav" fill="clear" size="small" (click)="presentLoading('next')" [disabled]="dis_btn_next">
+            <ion-icon size="large" class="inc_nav"  name="arrow-dropright"></ion-icon>
+        </ion-button>
+    </div>
+    <ion-card  class="cont_card1" [hidden]="Hid_main_content">
+    <div class="div_cardm">
+        <div class="div_card1">
+            <div class="div_sub1">  
+                <ion-label class="lbl_field"><b>プロバイダ: </b>{{providerPrefix}}  </ion-label>  
+                <ion-label class="lbl_field" style="float:right;">{{weighing_date}}</ion-label>
+                <br>   
+                <ion-label class="lbl_field" style="margin-right: 10px" ><b>伝票 no.:</b>{{weighing_no}}</ion-label>
+    
+                <div style="margin-top:5px;margin-bottom:5px;">
+                    <ion-label class="lbl_field"><b>顧客: </b>{{company}}</ion-label>
+                </div>
+                
+                <ion-label class="lbl_field"><b>車番: </b>{{car_no}}</ion-label>     
+                <br>
+                <ion-label class="lbl_field"><b>検査官:</b> {{inspector}}
+                </ion-label>                  
+            </div>
+                    
+            <ion-item class="item_wdetails">
+                <ion-label>総重量</ion-label>{{total_weight}}
+            </ion-item>
+            <ion-item class="item_wdetails">
+                <ion-label>空車重量</ion-label><p class="lbl_reduce">{{weight2}}</p>
+            </ion-item>
+            <ion-item class="item_wdetails">
+                <ion-label>正味重量</ion-label><p class="lbl_reduce">{{net_weight}}</p>
+            </ion-item>
+            <ion-item class="item_wdetails">
+                <ion-label><b>取引重量</b></ion-label><b>{{trade_weight}}</b>
+            </ion-item>
+        </div>
+        
+        <div class="div_card2"> 
+            <!-- <ion-progress-bar type="indeterminate"></ion-progress-bar>-->
+            <ion-label class="lbl_dtitle">検収内容</ion-label>              
+            <div class="div_item0">          
+                <ion-label class="lbl_dust">スケール引き</ion-label>  
+                <ion-row  class="div_row">   
+                    <ion-col>
+                        <ion-input class="input input2"  *ngIf="!MobileBrowser" placeholder="0" type="number"  [(ngModel)]="reduced_percent"></ion-input>
+                        <div class="div_item"  *ngIf="MobileBrowser" (click)="showNumpad('r_percent',reduced_percent || 0, 'スケール引き割合')"  >
+                            <label class="lbl_item">{{reduced_percent || 0}}</label>
+                        </div>
+                    </ion-col>
+                    
+                    <label class="lbl_holder">%</label>                       
+                    <ion-col>
+                            <ion-input class="input"  placeholder="0" *ngIf="!MobileBrowser" type="number" [(ngModel)]="reduced_weight"></ion-input>
+                            <div class="div_item"  *ngIf="MobileBrowser" (click)="showNumpad('r_weight',reduced_weight || 0, 'スケール引き重量')">
+                                <label class="lbl_item">{{reduced_weight || 0}}</label>
+                            </div>
+                    </ion-col>
+                    <label class="lbl_holder">KG</label>
+                </ion-row>       
+            </div>
+            
+            <div *ngFor="let item of wDetails">
+                <ion-label class="lbl_grade">品名 {{item.grade}}</ion-label>  
+                <ion-row  class="div_row" >   
+                    <ion-col  class="col1" >
+                        <!-- [disabled]="setReadOnly(item.items)" -->
+                        <ion-select  [interfaceOptions]="{header:'品名' +item.grade}" [(ngModel)]="item.item_code" class="select" placeholder="選択してください" (ionChange)="itemChange(item)">
+                            <ion-select-option  value="0"></ion-select-option> 
+                            <ion-select-option  *ngFor="let m_items of master_items" value="{{m_items.item_code}}">{{m_items.item_name}}</ion-select-option>                                            
+                        </ion-select>
+                    </ion-col>
+                    <!-- [readonly]="setReadOnly(item.editable)" -->
+                    <!-- auto calculate percentage base on trading weight /(change)="percentChange(item.grade)" -->
+                    <ion-col class="col1" size="2">
+                        <ion-input class="input input2"  *ngIf="!MobileBrowser"   placeholder="0" [(ngModel)]="item.percent"  type="number" (change)="percentChange(item.grade)"></ion-input>
+                        <div class="div_item"  *ngIf="MobileBrowser" (click)="showNumpad(item.grade+'_per',item.percent || 0, '品名'+item.grade+' 割合')">
+                            <label class="lbl_item">{{item.percent || 0}}</label>
+                        </div>
+                    </ion-col>
+                    
+                    <label class="lbl_holder">%</label>
+                    <ion-col class="col1" size="3">
+                            <ion-input class="input"  *ngIf="!MobileBrowser"  placeholder="0" [(ngModel)]="item.weight"  ></ion-input>
+                            <div class="div_item"  *ngIf="MobileBrowser" (click)="showNumpad(item.grade+'_kg', item.weight || 0,  '品名'+item.grade +' 重量')">
+                                <label class="lbl_item">{{item.weight || 0}}</label>
+                            </div>
+                    </ion-col>
+                    <label class="lbl_holder">KG</label>
+                </ion-row>
+                <br>
+            </div>
+            <ion-label class="lbl_grade">ハッチ</ion-label>
+            <!-- <ion-input class="input3" style="max-width:140px; text-align: center" [(ngModel)]="hatch_no" ></ion-input> -->
+                <ion-select [interfaceOptions]="{header:'ハッチ番号'}" style="width: 150px;" [(ngModel)]="hatch_no" class="select" placeholder="選択検査官">                              
+                    <ion-select-option value="0">-</ion-select-option> 
+                    <ion-select-option value="1">1</ion-select-option> 
+                    <ion-select-option value="2">2</ion-select-option> 
+                    <ion-select-option value="3">3</ion-select-option> 
+                </ion-select>
+            <br>   
+            <ion-label class="lbl_grade">検査官</ion-label>  
+            <ion-select [interfaceOptions]="{header:'検査官'}" style="width: 150px;" [(ngModel)]="inspector_code" class="select" placeholder="選択検査官">                              
+                <ion-select-option value="null"></ion-select-option> 
+                <ion-select-option  *ngFor="let m_inspector of master_inspectors" value="{{m_inspector.inspector_code}}">{{m_inspector.inspector_name}}</ion-select-option>                                            
+            </ion-select>
+            <br>          
+            <ion-textarea placeholder="検査の解説..." [(ngModel)]="remarks"  class="input3" maxlength="500" ></ion-textarea>
+            <br>
+            <ion-label class="lbl_statusSave">{{save_status}}</ion-label>  
+        </div>
+    </div>
+    <ion-button class="btn_save" [hidden]="dis_btn_save" expand="block" (click)="doSave()">
+        <ion-icon slot="start" name="save"></ion-icon>決定
+    </ion-button>
+    <ion-button class="btn_save" color="success" [hidden]="!dis_btn_save" expand="block" (click)="doSave()">
+        <ion-icon slot="start" name="create"></ion-icon>編集
+    </ion-button>
+    </ion-card>  
+<!-- </div> -->
+</ion-content>

@@ -1,0 +1,33 @@
+.content{
+    width: 100%;
+    max-width: 500px;
+    
+    button{
+        width: 50px;
+        max-width: 70px;
+        height: 40px;
+        margin: 5px;
+        font-size: 20px;
+    }
+}
+
+.div_val {
+    text-align: right;
+}
+
+.div_title {
+    text-align: left;
+}
+
+.value {
+    margin: 5px;
+    margin-bottom: 10px;
+    font-weight: 400;
+    font-size: 30px;
+    color: #223f67;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 350;
+}

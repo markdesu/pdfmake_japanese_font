@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>検査ログ</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card class="card_cont">
+        <ion-card-header >
+          <div class="card_header">
+              <ion-card-title>
+                  検査リスト
+                  <ion-button class="btn_download" fill="solid" [hidden]="hide_btndl"  (click)="downloadCSV()">ダウンロード
+                      <ion-icon name="download" slot="start"></ion-icon>
+                  </ion-button>
+                </ion-card-title>
+                <ion-card-subtitle>
+                  完了した最近の 50 の検査のリスト。
+                  <br>
+                  <label  style="color: #9d3b3b;">{{lbl_status}}</label>
+                </ion-card-subtitle>
+          </div>
+           
+        </ion-card-header>
+        <div class="div_tbl">  
+          <div class="div_tblhandler">
+            <table class="tbl_logs">  
+              <tr>              
+                <th>検査日</th>       <!-- Inspection Date -->                   
+                <th>車番</th>       <!-- Car No -->      
+                <th>伝票 No.</th>     <!-- Weighing No -->                                      
+              </tr>     
+              <ng-container  *ngFor="let logs of arr_logs" border="1" >                 
+                <tr>       
+                  <td class="td_vtotalname">{{logs.inspection_date}}</td>
+                  <td style="text-align: center;">{{logs.car_no}}</td>
+                  <td style="text-align: center;">{{logs.weighing_no}}</td>   
+                </tr>
+              </ng-container> 
+            </table>
+        </div>
+    </div>
+  </ion-card>
+</ion-content>
+
+
+<!--.............. Comment Area Below ............. -->
+
+<!-- <div class="div_action"> 
+    <label><b>最近の50の点検のリスト</b></label><br>
+    <label style="color: #9d3b3b;">{{lbl_status}}</label><br>
+    <ion-button  class="btn_download" fill="outline" [hidden]="hide_btndl" size="small" (click)="downloadCSV()"> <ion-icon name="download" slot="start"></ion-icon>このデータを CSV で保存</ion-button>     
+</div>
+-->

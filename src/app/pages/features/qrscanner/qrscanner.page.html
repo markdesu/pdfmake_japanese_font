@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>QRスキャナ</ion-title>
+    <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card class="card_cont">
+      <div class="div_img" [hidden]="!show_divImage">
+          <img  id="up_img" [src]="img_url"> <br/>
+      </div>
+      <div class="div_scan_cam" [hidden]="!show_divCam">
+        <canvas  class="scan_cam" id="scan-canvas"></canvas>
+      </div>
+      <div class="div_output">   
+          <ion-item class="item_output">
+              コード:<ion-label id="qrDecode">{{qrcodeDetected}}</ion-label>
+            </ion-item>
+          <div class="div_status">
+              ステータス:  <ion-label id="qrStatus"> {{scanStatus}}</ion-label>
+          </div>
+          <ion-label id="IDstatus">{{wIDStatus}}</ion-label>
+      </div>
+      <div class="div_btns"> 
+          <ion-button  class="btn_action" fill="solid"  (click)="startScanner()"><ion-icon slot="start" name="videocam"></ion-icon>スキャン</ion-button>
+          <ion-button class="btn_open" [disabled]="disable_btnOpen" color="success" (click)="checkAccessID()"><ion-icon slot="start" name="open"></ion-icon>ビューの計量</ion-button>
+      </div>
+      <div class="div_alt"> 
+          <label>QR画像を手動でアップロードします。</label>
+          <br>
+          <ion-button class="btn_action btn_action" fill="clear" (click)="showImg()">        
+            <input type="file" id="myFileInput" (change)="previewFile($event)" accept="image/png,image/x-png,image/gif,image/jpeg">アップロード
+          </ion-button>
+          <ion-button class="btn_action btn_checkqr"  fill="clear"  (click)="checkQR()" [hidden]="!show_btnCheck">QR 点検</ion-button>
+      </div>
+  </ion-card>
+</ion-content>
+
+
+
+<!-- Comment Area Below _______________________________________________________________________________________ -->
+
+<!-- <ion-icon slot="start" name="arrow-round-up"></ion-icon>   -->
+<!-- <ion-icon slot="start" name="checkbox-outline"></ion-icon> -->
+
+<!-- <div class="div_output">
+    <div class="div_status">
+        ステータス:  <ion-label id="qrStatus"> {{scanStatus}}</ion-label>
+    </div>
+  <ion-item class="item_output">
+    コード:
+    <ion-label id="qrDecode">{{qrcodeDetected}}</ion-label>
+
+  </ion-item>
+  <ion-label id="IDstatus">{{wIDStatus}}</ion-label>
+  <ion-button class="btn_open" [disabled]="disable_btnOpen" color="success" expand="block" (click)="checkAccessID()">
+      <ion-icon slot="start" name="open"></ion-icon>ビューの計量
+  </ion-button>
+</div> -->

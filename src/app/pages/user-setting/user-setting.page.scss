@@ -1,0 +1,63 @@
+.div_content {
+    height: 100%;
+    padding: 10px;
+    overflow: auto; 
+}
+
+.div_formbody {
+    margin-top:10px;
+    max-height: 500px; 
+    transition: height .5s ease;
+    -webkit-transition: height .5s ease;
+
+    overflow: hidden;
+}
+
+.div_form {
+    max-height: 500px; 
+    // height: 240px;
+    border: solid .5px #5b73a27f; 
+    margin-bottom: 5px; 
+    margin-top:5px; 
+    border-radius: 4px; 
+    padding:10px;
+    padding-bottom: 15px;
+    max-width: 400px;
+}
+
+
+.div_btnaction {
+    text-align: center;
+    padding:5px;
+}
+
+.div_status {
+    text-align: center;
+    padding: 5px;
+    background: #ff9f76;
+    border-radius: 2px;
+}
+
+.inputl_lblcustom1 {
+    font-size: 13px;
+    // width: 200px;
+}
+
+.btn_action {
+    --padding-start: 10px;
+    --padding-end: 10px;
+    padding: 0;
+    margin: 3px 2px;
+    font-size: 11px;
+    min-width: 110px;
+    margin-top:10px;
+}
+
+.ibtn {
+    cursor: pointer;
+}
+
+.lbl_status {
+    color: white;
+    font-size: 13px;
+}

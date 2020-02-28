@@ -1,0 +1,245 @@
+App Compontent html
+ 
+
+<!-- Toolbar color : style="color: #0d5191" -->
+<!--<ion-icon [name]="sub.icon" slot="start"></ion-icon> -->       
+      
+
+<!--<ion-list style="background-color: #263d58 !important;" > 
+    <ion-list style="background-color: transparent !important;" >                
+              style="background-color: #315e96 !important;" 
+                    <ion-item [hidden] = "!authguard.isAuthenticated"> 
+                    <ion-label style="color: #0d5191">
+                            {{authguard.provider_name}}
+                    </ion-label>
+                style="color: #0d5191"
+                style="color: #0d5191"
+                </ion-item>  
+               <ion-item [hidden] = "!authguard.isAuthenticated"> 
+                <ion-label>
+                    {{authguard.username}}
+                </ion-label>
+    <ion-icon style="color: #ffffff" slot="start" name="contact"></ion-icon>
+    </ion-item> -->
+                     
+<!--<ion-menu-toggle auto-hide="false" *ngFor="let p of authguard.authorized_items" [hidden]= "!authguard.isAuthenticated && !userlevelguard.authorized_admin ">
+        <ion-item [routerDirection]="root" [routerLink]="[p.url]" (click)="p.action" routerDirection="root" routerLinkActive="active" >
+            <ion-icon  slot="start" [name]="p.icon"></ion-icon>
+            <ion-label>{{p.title}}</ion-label>
+        </ion-item>
+    </ion-menu-toggle>-->        
+            
+<!--<ion-menu-toggle auto-hide="false" *ngFor="let p of userlevelguard.authorized_items" >
+        <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" (click)="p.action" >
+            <ion-icon  style="color: #ffffff" slot="start" [name]="p.icon"></ion-icon>
+            <ion-label>{{p.title}}</ion-label>
+        </ion-item>
+    </ion-menu-toggle>-->
+            
+<!--<ion-item  (click)="asm_logout()" [hidden]= "!userlevelguard.authorized_admin">
+        <ion-icon slot="start" name="log-out"></ion-icon>
+        <ion-label>ログアウト2</ion-label>
+    </ion-item>
+    <ion-item  (click)="logout()" [hidden]= "!authguard.isAuthenticated && !userlevelguard.authorized_admin">
+        <ion-icon  slot="start" name="log-out"></ion-icon>
+        <ion-label>ログアウト</ion-label>
+    </ion-item> -->
+    
+    
+    
+    
+    
+    Weighing Page Ts
+    
+     // @HostListener('click') onClick() {
+    //   // this.renderer.invokeElementMethod(this.elRef.nativeElement, 'blur', []);
+    //   this.renderer.invokeElementMethod(event.target, 'blur');
+ 
+    //   console.log('wee2');
+    // }
+    
+    
+    
+    // ---check access function
+        // this.weighingAPI.checkAccessCode(accessID)
+    // .subscribe( res => {
+    //   console.log(res);
+    //   if(res['data'] == '1'){
+    //    this.checkWeighing(this.weighingID);
+       
+    //   }else{
+    //     this.invalidParams();
+    //     console.log('invalid access');
+    //   }
+    // });
+    
+    
+    
+    // validateInput() {
+    //   var data = this.wDetails;
+    //   var validinput = true;
+    //   console.log('in');
+    //     // if((this.reduced_percent > 0 && this.reduced_percent <= 100)){
+          
+    //     // }else{
+    //     //   validinput = false;
+    //     // }
+            
+    //     //validate percent and item code.
+        
+    //     for (let index = 0; index < data.length; index++) {
+    //       console.log(data[index]);
+    //       if(data[index]['editable'] != '1' && data[index]['edited'] == '1'){
+        
+    //          if(data[index]['item_code'] == '' || !data[index]['percent'] || +data[index]['percent'] == 0){
+    //           // console.log('status2:' + data[index]['item_code'] + '//' + data[index]['percent'] ); 
+    //           validinput = false;      
+    //         }
+    //       }
+    //     }
+    
+    //     if(this.wD_percent != 100){
+    //       validinput = false;  
+        
+    //     }
+  
+    //     return validinput;
+      
+    // }
+    
+    
+    
+    
+    // async doSave(){
+    //   if(this.authGuard.user_type === 'inspector' || this.authGuard.is_inspector){
+   
+    //       var final = this.validateInput();
+    //       console.log(final);
+  
+    //       // Return if invalid input provided.
+    //       if(!final){
+    //         // Invalid Input.
+    //         this.save_status = '入力が無効';
+    //         return;
+    //       }else{
+    //           this.presentAlertConfirm().then( res =>{
+    //               if(res){
+    //                 for (let index = 0; index < this.wDetails.length; index++) {
+                  
+    //                     var Obj = {}; 
+    //                     if((this.wDetails[index]['percent'] && this.wDetails[index]['editable']!= '1')  || (+this.wDetails[index]['percent'] > 0 && this.wDetails[index]['editable']!= '1')){
+    //                           Obj['weighing_id'] = this.weighingID;
+    //                           Obj['provider_id'] = this.providerID;
+    //                           Obj['weighing_date'] = this.weighingAPI.formatterDBDate(new Date);
+    //                           Obj['weighing_no'] = this.weighing_no;
+    //                           Obj['line_no'] = this.wDetails[index]['grade'];
+    //                           Obj['item_code'] = this.wDetails[index]['item_code'];
+    //                           Obj['percent'] = this.wDetails[index]['percent'] || 0;
+    //                           Obj['verified_weight'] =  this.wDetails[index]['weight'] || 0;
+    //                            console.log(Obj);
+    //                           this.execSave(Obj);
+    //                           this.wDetails[index]['editable'] = '1';
+    //                     }
+    //                     else if(this.wDetails[index]['editable']== '1' && this.wDetails[index]['edited']== '1' ){
+    //                       Obj['percent'] = this.wDetails[index]['percent'] || 0;
+    //                       Obj['verified_weight'] = this.wDetails[index]['weight'] || 0;
+    //                       Obj['id'] = this.wDetails[index]['id'];
+    //                       this.execUpdateWeighingDetails(Obj);
+    //                     }
+    //                 } 
+                    
+    //                 var Obj2 = {}
+    //                     Obj2['id'] = this.weighingID;
+    //                     Obj2['reduced_percent'] = this.reduced_percent;
+    //                     Obj2['inspector'] =this.authGuard.username;
+    //                     // console.log()
+    //                     this.execUpdateWeighing(Obj2);
+                    
+    //                     var Obj_inspection = {"inspector_id": this.authGuard.user_id , "weighing_id": this.weighingID}
+    //                     this.saveInspectionLog(Obj_inspection);
+    //               }
+    //           });
+    //       }
+    //   }else{
+    //     this.save_status = '検査のために許可されていないユーザー';
+    //   }
+    // }
+    
+    
+    
+    Home Page html
+    
+    
+    
+    <!-- <ion-card class="welcome-card">
+      <ion-img src="/assets/shapes.svg"></ion-img>
+      <ion-card-header>
+        <ion-card-subtitle>Get Started</ion-card-subtitle>
+        <ion-card-title>Welcome to Ionic</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Now that your app has been created, you'll want to start building out features and components. Check out some of the resources below for next steps.</p>
+      </ion-card-content>
+    </ion-card>
+    <ion-list lines="none">
+      <ion-list-header>
+        <ion-label>Resources</ion-label>
+      </ion-list-header>
+      <ion-item href="https://ionicframework.com/docs/">
+        <ion-icon slot="start" color="medium" name="book"></ion-icon>
+        <ion-label>Ionic Documentation</ion-label>
+      </ion-item>
+      <ion-item href="https://ionicframework.com/docs/building/scaffolding">
+        <ion-icon slot="start" color="medium" name="build"></ion-icon>
+        <ion-label>Scaffold Out Your App</ion-label>
+      </ion-item>
+      <ion-item href="https://ionicframework.com/docs/layout/structure">
+        <ion-icon slot="start" color="medium" name="grid"></ion-icon>
+        <ion-label>Change Your App Layout</ion-label>
+      </ion-item>
+      <ion-item href="https://ionicframework.com/docs/theming/basics">
+        <ion-icon slot="start" color="medium" name="color-fill"></ion-icon>
+        <ion-label>Theme Your App</ion-label>
+      </ion-item>
+    </ion-list> -->
+    
+    
+    
+    systemguard server Ts
+    
+    
+
+
+  
+//   getSessionData(){
+//     this.authorized_items = [];
+//     const sessionData1 = localStorage.getItem('Session');
+//     if(sessionData1){
+//     console.log('in');
+//       var bytes  = CryptoJS.AES.decrypt(sessionData1.toString(), '123');
+//       var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+//       if( decryptedData.user_type == 'system_admin'){
+//         this.we.authorized_items = [];
+//         this.we.provider_name = '船積みネット';
+//         this.admin_name = decryptedData.username;
+//         this.authorized_admin = true;   
+//       this.setMenuItems();
+//       return true;
+//       } 
+//     }else{
+//       return false;
+//     }
+//   }
+//   isAdminLoggedIn() {
+//     if(this.getSessionData()) {
+//         return true; 
+//     } else {
+//         return false;
+//     }
+// }
+//   setMenuItems(){
+//     // console.log('2')
+//     this.authorized_items.push(this.ADM_001);
+//     this.authorized_items.push(this.ADM_002);
+//     this.authorized_items.push(this.ADM_003);
+//   }

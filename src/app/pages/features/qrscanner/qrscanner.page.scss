@@ -1,0 +1,132 @@
+
+.card_cont {
+    max-width: 500px;
+    margin: 10px auto;
+ 
+}
+
+//Cam Container //////////////////////////////////
+
+.div_scan_cam {
+    margin: 10px auto;
+    margin-top: 20px;
+    padding-left:  10px;
+    padding-right: 10px;
+    border-radius: 2px;
+    text-align: center;
+    
+}
+
+.scan_cam {
+    max-width: 100%;
+    min-height: 250px;
+    margin: auto auto;
+    border: solid 1px #7db6dfd8;
+    border-radius: 2px;
+  
+    
+}
+
+//Image Container /////////////////////////////
+
+
+.div_img{
+    max-width: 100%;
+    height: 250px;
+    max-height: 250px;
+    margin: 10px 10px;
+    margin-top: 20px;
+    border-radius: 2px;
+    text-align: center;
+    border: solid 1px #509f58;
+}
+
+#up_img{
+    max-height: 248px;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.div_status{
+    padding-left: 20px;
+    text-align: left;
+    padding-top: 10px;
+}
+
+.div_btns{
+    padding: 5px;
+    text-align: center;
+}
+
+.div_alt {
+    margin-top: 15px;
+    padding: 5px;
+    padding-top: 15px;
+    padding-left: 20px;
+    text-align: left;
+    border-top: solid .5px #77777762;
+}
+
+.div_output {
+    margin: 10px auto;
+    padding-left:  5px;
+    padding-right: 5px;
+    text-align: center;
+}
+
+.item_output {
+    text-align: left;
+    padding-top: none !important;
+    padding-right: 15px;
+}
+
+.btn_action {
+    width: 120px !important;
+}
+
+.btn_open {
+    margin: 0 10px;
+    width: 200px;
+}
+
+// ID ////////////////////////////////////
+
+#qrStatus {
+    width: 100%;
+    color :#e76363fe;
+    margin-left: 10px;
+    font-size: 13px;
+}
+
+#qrDecode {
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 13px;
+    color : #50a25cf0;
+    text-align: center;
+    overflow: hidden;
+}
+
+#myFileInput {
+    position: absolute;
+    opacity: 0;
+}
+
+#IDstatus {
+    color: #e76363fe;
+}  
+
+
+
+// <!-- Comment Area Below _______________________________________________________________________________________ -->
+// .div_img{
+//     max-width: 100%;
+//     height: 300px;
+//     max-height: 300px;
+//     margin: 10px 10px;
+//     margin-top: 20px;
+//     border-radius: 2px;
+//     text-align: center;
+//     border: solid 1px #509f58;
+// }

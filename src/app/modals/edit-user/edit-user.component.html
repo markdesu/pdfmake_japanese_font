@@ -1,0 +1,57 @@
+
+<div class="dialog">
+    <div class="div_title">
+        <label class="lbl_title">ユーザー情報の編集</label>    
+        <ion-button  class="btn_close" fill="clear"    color="light" (click)="close()" >
+                <ion-icon name="close-circle" slot="icon-only"></ion-icon>
+        </ion-button>  
+    </div>
+
+    <div class="div_info">
+        <div class="div_cont">
+            <ion-item>
+                <ion-label position="stacked">ログインID</ion-label>
+                <ion-input type="text"  maxlength="8" [(ngModel)]="data.login_id"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">名前</ion-label>
+                <ion-input type="text" [(ngModel)]="data.name"></ion-input>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label position="stacked">電子メール</ion-label>
+                <ion-input type="text"  [(ngModel)]="data.email"></ion-input>
+            </ion-item>
+
+            <div *ngIf="data.ins_form" style="padding-left: 10px;">
+                <br>
+                <ion-checkbox [(ngModel)]="set_ins_active"  style="vertical-align: middle" ></ion-checkbox><label  style="margin-left: 10px; vertical-align: middle; ">能動</label> 
+            </div>
+            
+            <br>
+            <div  *ngIf="!data.ins_form">   
+                <label class="lbl_fheader" >特権</label>
+                <br>
+                <br>
+                <ion-checkbox [(ngModel)]="data.is_admin"></ion-checkbox><label style="margin: auto 10px">管理者</label>
+                <br>
+                <br>
+                <ion-checkbox [(ngModel)]="data.is_inspector"  *ngIf="data.ins_mng"></ion-checkbox><label  *ngIf="data.ins_mng" style="margin: auto 10px">検査官</label> 
+            </div>
+            <div margin-vertical text-center> 
+                <ion-button class="btn_action" color="success" (click)="save()" >
+                    <ion-icon name="save" slot="start"></ion-icon> 保存
+                </ion-button>    
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- comment area -->
+<!-- <ion-button  class="btn_action" color="warning" (click)="close()" >
+<ion-icon name="close-circle" slot="start">
+</ion-icon> 閉じる
+</ion-button> -->
+    

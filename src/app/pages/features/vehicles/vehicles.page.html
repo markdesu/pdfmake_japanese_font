@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>着信車</ion-title>
+    <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card class="card_cont">
+        <ion-card-header>
+            <ion-card-title>
+                車両リスト  
+                <ion-button class="btn_refresh" fill="solid" (click)="getVechiles()">リロード
+                    <ion-icon slot="start" name="refresh-circle"></ion-icon>
+                </ion-button>
+            </ion-card-title>
+            <ion-card-subtitle>{{lblstatus}}</ion-card-subtitle>
+        </ion-card-header>
+        <div class="div_list">
+            <ion-list class="car_list">
+                <ion-item *ngFor="let vehicle of vehiclesList">
+                    <ion-icon name="bus" slot="start"></ion-icon>
+                    <b class="lbl_car" >車のNo.:<br>{{vehicle.car_no}} </b><br><br>
+                    <p class="lbl_vdetails"> 船名: <label style="color: #39613d;"> {{vehicle.ship_name}} </label> <br>   総重量: {{vehicle.gross_weight}} <br>  総時間: {{vehicle.gross_time}} <br> 顧客: {{vehicle.vendor_name}} <br> 計量No.: {{vehicle.weighing_no}}</p> 
+                    <br>
+                </ion-item>
+            </ion-list>
+        </div>
+    </ion-card>
+</ion-content>
+
+
+
+
+
+<!--.............. Comment Area Below ............. -->
+
+<!-- <p class="lbl_vdetails" text-wrap>  計量No.: {{vehicle.weighing_no}} /  総重量:{{vehicle.gross_weight}} / 納期: {{vehicle.delivery_date}}</p>-->

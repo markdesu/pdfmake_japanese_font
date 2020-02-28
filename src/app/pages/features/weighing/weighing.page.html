@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    <ion-title>レポート サービス</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="card_cont">
+      <ion-grid>
+          <ion-row>
+            <ion-col class="content_col">
+                <div class="div_action">
+                    <ion-item> 
+                        <ion-label  position="stacked"><b>レポートの種類</b></ion-label>       
+                        <ion-select style="color: #3b5868;" [(ngModel)]="selectedReportType" placeholder="選択してください" (ionChange)="reportTypeChange()"> 
+                            <ion-select-option  *ngFor="let rep of reportType" value="{{rep.code}}">{{rep.name}}</ion-select-option>                                         
+                        </ion-select>  
+                    </ion-item>        
+                    <br>
+                    <br>
+                    <div  class="div_notice">
+                        <label>業者及び期間と船を選択してください。</label>
+                    </div>
+                    
+                    <label id="lbl_warning">{{lblWarning}}</label>
+                    <br>
+                    <ion-item>
+                        <ion-label position="stacked">納入業者</ion-label>       
+                        <ion-select [(ngModel)]="selectedVendor" placeholder="選択してください" (ionChange)="vendorChange()">              
+                            <ion-select-option  *ngFor="let vendor of vendors" value="{{vendor.vendor_code}}">{{vendor.vendor_name}}</ion-select-option>                                            
+                        </ion-select>
+                    </ion-item>
+                
+                    <ion-item>
+                        <ion-label>データの取得元</ion-label>
+                        <ion-datetime id="df_holder"   [(ngModel)]="fdate" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" placeholder="日付の選択"  (ionChange)="vendorChange()"></ion-datetime>
+                    </ion-item>
+                    
+                    <ion-item>
+                    <ion-label>データの先</ion-label>
+                    <ion-datetime id="dt_holder"   [(ngModel)]="tdate" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" placeholder="日付の選択"  (ionChange)="vendorChange()"></ion-datetime>
+                    </ion-item>
+                    
+                    <ion-item [hidden]="hide_ship">
+                        <ion-label  position="stacked">船名</ion-label>
+                        <ion-select  [(ngModel)]="selectedShip" placeholder="選択してください" (ionChange)="shipChange()">
+                            <ion-select-option  *ngFor="let ship of shipsvendor" value="{{ship.ship_code}}">{{ship.ship_name}}</ion-select-option>                                         
+                        </ion-select>
+                    </ion-item>
+                    
+                    <ion-item [hidden]="hide_ledger">
+                        <ion-label position="stacked">代納業者</ion-label>       
+                        <ion-select [(ngModel)]="selectedSubvendor" placeholder="選択してください">                    
+                            <ion-select-option  *ngFor="let subvendor of subvendors" value="{{subvendor.subvendor_code}}">{{subvendor.subvendor_name}}</ion-select-option>                                            
+                        </ion-select>
+                    </ion-item>
+                </div>       
+            </ion-col>
+          </ion-row>
+      </ion-grid>  
+      <ion-button class="btn_search"  color="success" expand="block" (click)="search()">
+          <ion-icon slot="start" name="search"></ion-icon>検索
+      </ion-button>
+  </ion-card>
+</ion-content>

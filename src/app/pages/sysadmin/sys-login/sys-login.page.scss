@@ -1,0 +1,106 @@
+.login_content{
+    height: 100%;
+}
+
+.footer_title {
+    font-size: 13px;
+    text-align: center;
+    color: #515151;
+}
+  
+.login_card {
+    margin: auto auto;
+    border-radius: 2px;
+    background-color: #ffffff36;
+}
+  
+.login_card_header {
+  // background-color: #315e96;
+  background: linear-gradient(#cb8801,  rgb(198, 163, 103) );
+  padding-top:30px;
+ 
+}
+
+.login_card_title {
+  color: #ffffff;
+}
+
+.login_status {
+  color: #fc0101;
+  
+}
+
+.div_chk {
+  text-align: center;
+  margin: 10px auto;
+  padding-top: 10px;
+}
+
+.checkbox {
+  vertical-align: top;
+  margin-right: 10px;
+}
+
+
+#btn-confirm {
+  height: 50px;
+}
+
+
+
+
+@media screen and (min-width: 600px) {
+    
+  .login_card {
+      max-width: 600px;
+      // margin-top: 50px;
+  }
+  
+  .login_content {
+    padding-top: 50px;
+}
+
+  .card_content {
+      margin: auto auto;
+      max-width: 400px;
+      padding-bottom: 25px;
+  }
+}
+
+
+@media screen and (max-width: 600px) {
+  
+  .login_card{
+      width: 100%;
+      height: 100%;
+  }
+  
+
+  
+  .card_content{
+      margin: auto auto;
+      max-width: 400px;
+   
+  }
+  
+}
+
+
+// Comment Area.....................................
+
+
+// .div_main {
+//   width:100%;
+//   background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6) ), url('../../assets/bg10.jpg') no-repeat;
+//   background-size: auto;
+//   background-position:center top;
+//   background-attachment: fixed;
+//   height:400px;
+//   overflow: hidden;
+
+// }
+
+   
+// overflow: hidden;
+// background: url('../../../assets/img/login_bg.png') no-repeat ;
+// background-size: cover;

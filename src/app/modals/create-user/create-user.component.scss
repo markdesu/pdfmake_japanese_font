@@ -1,0 +1,103 @@
+
+
+.div_create {
+    width: 100%;
+    display: inline-block;
+    ion-item {
+        font-size: 15px;
+    }
+}
+
+.div_form {
+    overflow-y: scroll;
+    height: 500px;
+    padding: 15px;
+    margin-right: 10px;
+}
+
+.div_status {
+    text-align: center;
+    padding: 5px;
+    background: #ff9f76;
+}
+
+.div_title {
+    background:#1e2e41;
+    margin-bottom: 5px;
+    padding-left: 15px;
+    height: 45px;
+    width: 100%;
+}
+
+.dialog{ 
+    width: 500px;
+}
+
+// Buttons, Labels, Inputs /////////////////
+
+.btn_action {
+    width: 100px;
+}
+
+.form_input {
+    font-size: 14px;
+}
+
+.success_status {
+    color: white;
+    font-size: 13px;
+}
+
+.lbl_title {
+    color: #ffffff;
+    display: inline-block;
+    font-weight: 500;
+    margin-top: 12px;
+   
+}
+
+.btn_close {
+     height: 40px;
+     float:right;
+}
+
+@media screen and (max-width: 630px) {
+    
+    .div_create{
+        text-align: left;
+        width: 100%;
+        min-height: 400px;
+    }
+    
+    .div_form{
+        overflow-y: scroll;
+        height: 500px;
+        padding: 10px;
+    }
+    
+    .btn_close{
+        margin:auto 2px;
+        height: 45px;
+    }
+    
+    .div_title{
+        padding-left: 25px;
+    }
+        
+    .dialog{
+        width: 100%;
+    }
+}
+
+
+
+ion-label {
+    color: #656668 !important;
+    font-weight: 500 !important;
+}
+
+
+ion-item {
+    margin-top: 5px;
+   
+ }

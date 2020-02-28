@@ -1,0 +1,143 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    <ion-title>レポート サービス</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card class="card_cont">
+        <ion-grid>
+            <ion-row>
+                <ion-col class="content_col">
+                    <div class="div_action">
+                        <ion-item> 
+                            <ion-label  position="stacked"><b>レポートの種類</b></ion-label>       
+                            <ion-select style="color: #3b5868;" [(ngModel)]="selectedReportType" placeholder="選択してください" (ionChange)="reportTypeChange()"> 
+                                <ion-select-option  *ngFor="let rep of authorized_reports" value="{{rep.code}}">{{rep.name}}</ion-select-option>                                         
+                            </ion-select>  
+                        </ion-item>        
+                        <br>
+                        <br>
+                        <div  class="div_notice">
+                            <label>業者及び期間と船を選択してください。</label>
+                        </div>
+                        
+                        <label id="lbl_warning">{{lblWarning}}</label>
+                        <br>
+                    
+                        <ion-item>
+                            <ion-label>データの取得元</ion-label>
+                            <ion-datetime id="df_holder"   [(ngModel)]="fdate" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" placeholder="日付の選択"  (ionChange)="dateChange()"></ion-datetime>
+                        </ion-item>
+                        
+                        <ion-item>
+                            <ion-label>データの先</ion-label>
+                            <ion-datetime id="dt_holder"   [(ngModel)]="tdate" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" placeholder="日付の選択"  (ionChange)="dateChange()"></ion-datetime>
+                        </ion-item>   
+                        
+                        <ion-item [hidden]="hide_vendor">
+                            <ion-label position="stacked">納入業者</ion-label>       
+                            <ion-select [(ngModel)]="selectedVendor" placeholder="選択してください" (ionChange)="dateChange()">              
+                                <ion-select-option  *ngFor="let vendor of vendors" value="{{vendor.vendor_code}}">{{vendor.vendor_name}}</ion-select-option>                                            
+                            </ion-select>
+                        </ion-item>
+                        
+                        <ion-item [hidden]="hide_ship">
+                            <ion-label  position="stacked">船名</ion-label>
+                            <ion-select  [(ngModel)]="selectedShip" placeholder="選択してください" (ionChange)="shipChange()">
+                                <ion-select-option  *ngFor="let ship of shipsvendor" value="{{ship.ship_code}}">{{ship.ship_name}}</ion-select-option>                                         
+                            </ion-select>
+                        </ion-item>
+                        
+                        <ion-item [hidden]="hide_ledger">
+                            <ion-label position="stacked">代納業者</ion-label>       
+                            <ion-select [(ngModel)]="selectedSubvendor" placeholder="選択してください">                    
+                                <ion-select-option  *ngFor="let subvendor of subvendors" value="{{subvendor.subvendor_code}}">{{subvendor.subvendor_name}}</ion-select-option>                                            
+                            </ion-select>
+                        </ion-item>
+                        
+                        
+                        <!-- selection by ship then vendor / subvendors -->
+                        
+                        <ion-item [hidden]="hide_pership">
+                            <ion-label position="stacked">納入業者</ion-label>       
+                            <ion-select [(ngModel)]="selectedVendor" placeholder="選択してください" (ionChange)="dateChange()">              
+                                <ion-select-option  *ngFor="let vendor of vendors" value="{{vendor.vendor_code}}">{{vendor.vendor_name}}</ion-select-option>                                            
+                            </ion-select>
+                        </ion-item>
+                    
+                        <ion-item [hidden]="hide_pership || !(aggregate_type == 'summary') ">
+                            <ion-label  position="stacked">船名(複数)</ion-label>
+                            <ion-select multiple = "true" [(ngModel)]="selectedPerShipMulti" placeholder="選択してください">
+                                <ion-select-option  *ngFor="let ship of shipsvendor" value="{{ship.ship_code}}">{{ship.ship_name}}</ion-select-option>                                         
+                            </ion-select>
+                        </ion-item>
+                        
+                        <ion-item [hidden]="hide_pership || !(aggregate_type == 'list')">
+                            <ion-label  position="stacked">船名</ion-label>
+                            <ion-select [(ngModel)]="selectedPerShip" placeholder="選択してください">
+                                <ion-select-option  *ngFor="let ship of shipsvendor" value="{{ship.ship_code}}">{{ship.ship_name}}</ion-select-option>                                         
+                            </ion-select>
+                        </ion-item>
+                        <ion-list [hidden]="hide_pership">
+                            <ion-radio-group (ionChange)="radioChange($event)">                     
+                                <ion-item>
+                                    <ion-label>集計表</ion-label>
+                                    <ion-radio slot="start" value="summary" checked></ion-radio>
+                                </ion-item>
+                            
+                                <ion-item>
+                                    <ion-label>明細表</ion-label>
+                                    <ion-radio slot="start" value="list"></ion-radio>
+                                </ion-item>
+                            </ion-radio-group>
+                        </ion-list>                
+                    </div>       
+                </ion-col>
+            </ion-row>
+        </ion-grid>  
+        <ion-button class="btn_search"  color="success" expand="block" (click)="search()">
+            <ion-icon slot="start" name="search"></ion-icon>検索
+        </ion-button>
+    </ion-card>
+</ion-content>
+
+
+
+
+<!-- Comment Area Below -->
+
+<!-- <ion-item [hidden]="hide_pership" >
+    <ion-label>明細表</ion-label>
+    <ion-checkbox slot="" [(ngModel)]=""></ion-checkbox>
+    </ion-item> -->
+
+
+<!-- <ion-item [hidden]="hide_pership">
+    <ion-label  position="stacked">船名</ion-label>
+    <ion-select  multiple="true"  [(ngModel)]="selectedPerShip" placeholder="選択してください" (ionChange)="getPerShipVendors()">
+        <ion-select-option  *ngFor="let ship of ships" value="{{ship.ship_code}}">{{ship.ship_code}}) {{ship.ship_name}}</ion-select-option>                                         
+    </ion-select>
+</ion-item>
+
+<ion-item [hidden]="hide_pership">
+    <ion-label position="stacked">納入業者</ion-label>       
+    <ion-select [(ngModel)]="selectedShipVendor" placeholder="選択してください">              
+        <ion-select-option  *ngFor="let svendor of pershipvendors" value="{{svendor.vendor_code}}">{{svendor.vendor_code}}) {{svendor.vendor_name}}</ion-select-option>                                            
+    </ion-select>           
+</ion-item> -->
+<!-- <form class="example-form">
+    <mat-form-field class="example-full-width">
+    <input matInput  [matAutocomplete]="auto" [formControl]="vendorCtrl"  [(ngModel)]="selectedVendor" (ionChange)="vendorChange()"> 
+    <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let vendor of filteredVendor | async" [value]="vendor.vendor_code">
+    
+    <span>{{vendor.vendor_name}}</span>
+
+    </mat-option>
+    </mat-autocomplete>
+    </mat-form-field>
+</form> -->

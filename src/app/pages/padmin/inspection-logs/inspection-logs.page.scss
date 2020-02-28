@@ -1,0 +1,51 @@
+.div_tbl {
+    padding: 15px;
+    text-align: center;
+}
+
+.div_tblhandler{
+    width: 100%;
+    min-height: 380px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.tbl_logs {
+   width: 100%;
+}
+
+.tbl_logs  tr, {
+    border:solid 1px #848484;
+}
+
+.tbl_logs td{
+    padding:5px;
+    border:solid 1px #848484;
+}
+
+.tbl_logs th{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #496271;
+    color: #ffffff;
+}
+
+.div_action{
+    text-align: left;
+    padding: 5px;
+}
+
+.card_cont{
+    margin: 10px auto;
+    max-width: 500px;
+    min-height: 400px;
+}
+
+.card_header {
+    padding:10px 15px !important;
+}
+
+.btn_download{
+    float: right;
+    margin-left: 5px;
+}

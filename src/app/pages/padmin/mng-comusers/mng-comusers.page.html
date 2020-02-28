@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>ユーザー管理</ion-title>
+    <ion-buttons slot="start">
+        <ion-menu-button ></ion-menu-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="div_content">
+        <div class="div_buttons">
+            <ion-button  class="btn_action"  fill="clear" (click)="showCreateDailog()">
+                <ion-icon  slot="icon-only" name="person-add"></ion-icon>
+            </ion-button>
+            <ion-button  class="btn_action" fill="clear" (click)="showEditDailog()">
+                <ion-icon  slot="icon-only" name="create"></ion-icon>
+            </ion-button> 
+            <ion-button  class="btn_action" fill="clear"  (click)="deleteUser()">
+                <ion-icon slot="icon-only" name="trash"></ion-icon>
+            </ion-button>
+        </div>
+        <div class="div_tbl">
+            <div class="div_tblcontent">
+                <table mat-table [dataSource]="dataSource">
+                    
+                    <ng-container matColumnDef="username">
+                        <th mat-header-cell *matHeaderCellDef> ログインID </th>
+                        <td mat-cell *matCellDef="let element"> {{element.login_id}} </td>
+                    </ng-container>
+                                        
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef> 名前 </th>
+                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+                        
+                    <ng-container matColumnDef="email">
+                        <th mat-header-cell *matHeaderCellDef> 電子メール </th>
+                        <td mat-cell *matCellDef="let element"> {{element.pc_email}} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="is_admin">
+                        <th mat-header-cell *matHeaderCellDef> 管理者 </th>
+                        <td mat-cell *matCellDef="let element" class="td_status"> <ion-icon   *ngIf="element.is_admin" class="tbl_icons" name="checkmark-circle" style="color: #6ad32e"></ion-icon></td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="is_inspector" >
+                        <th mat-header-cell *matHeaderCellDef [hidden]="!valid_inspectorMng"> 検査官 </th>
+                        <td mat-cell *matCellDef="let element" class="td_status" [hidden]="!valid_inspectorMng"> <ion-icon   *ngIf="element.is_surveyor" class="tbl_icons" name="checkmark-circle" style="color: #6ad32e"></ion-icon></td>
+                    </ng-container>
+                    
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"class="tbl_header"  ></tr>
+                    <br>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"  class="tbl_tr" (click)="selectRow(row)" [class.active]="row.id == selectedRowID"></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</ion-content>

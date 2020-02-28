@@ -1,0 +1,90 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>ユーザー管理</ion-title>
+        <ion-buttons slot="start">
+            <ion-menu-button ></ion-menu-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="div_content">
+        <div class="div_autocom">
+            <mat-form-field appearance="outline" color="light" >
+                <mat-label>企業</mat-label>
+                <input matInput id="company" type="text"  placeholder="顧客名の検索" [formControl]="optionCtrl" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOption | async" [value]="option.name">{{option.name}}</mat-option>
+                </mat-autocomplete> 
+            </mat-form-field>                   
+            <ion-button  class="btn_search" fill="solid" color="light"  (click)="execGetUSer()">
+                <ion-icon slot="icon-only" name="search"></ion-icon>
+            </ion-button>
+            <ion-button  class="btn_search"  *ngIf="MobileBrowser" fill="solid" color="light"  (click)="showCreateDailog()">
+                <ion-icon slot="icon-only" name="person-add"></ion-icon>
+            </ion-button>
+            <ion-button  class="btn_action"  *ngIf="!MobileBrowser" style="float: right;" fill="solid" (click)="showCreateDailog()">
+                <ion-icon  slot="start" name="person-add"></ion-icon>ユーザを作成
+            </ion-button>
+        </div>       
+        <div class="div_tbl">
+            <div class="div_tblcontent">
+                <table mat-table [dataSource]="dataSource" >
+                    <ng-container matColumnDef="username">
+                        <th mat-header-cell *matHeaderCellDef class="custom_header">ログインID</th>
+                        <td mat-cell *matCellDef="let element" style="text-align: left;"> {{element.login_id}} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef class="custom_header">警告</th>
+                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="email">
+                        <th mat-header-cell *matHeaderCellDef class="custom_header">電子メール</th>
+                        <td mat-cell *matCellDef="let element"> {{element.pc_email}} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="is_admin">
+                        <th mat-header-cell *matHeaderCellDef class="custom_header">管理者</th>
+                        <td mat-cell *matCellDef="let element" class="td_status"> <ion-icon   *ngIf="element.is_admin" class="tbl_icons" name="checkmark-circle" style="color: #6ad32e"></ion-icon></td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="is_inspector">
+                        <th mat-header-cell *matHeaderCellDef class="custom_header">検査官</th>
+                        <td mat-cell *matCellDef="let element" class="td_status" > <ion-icon   *ngIf="element.is_surveyor" class="tbl_icons" name="checkmark-circle" style="color: #6ad32e"></ion-icon></td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef class="custom_header" style="text-align: center"> 操作</th>
+                        <td mat-cell *matCellDef="let element" class="td_status" >
+                            <ion-button   class="btni_action" fill="clear" (click)="showEditDailog()">
+                                <ion-icon  slot="icon-only" name="create"></ion-icon>
+                            </ion-button> 
+                            <ion-button  class="btni_action" color="warning" fill="clear" (click)="deleteUser()">
+                                <ion-icon slot="icon-only" name="trash"></ion-icon>
+                            </ion-button>
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"  class="tbl_header"  ></tr>
+                    <br>          
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"  (click)="selectRow(row)" [class.active]="row.id == selectedRowID"></tr>                  
+                </table>
+            </div>       
+        </div>
+    </div>
+</ion-content>
+
+
+
+<!-- comment section -->
+<!-- floatLabel="always" ;height: 25px; margin:0 auto; margin-right:5px;" -->
+<!-- <ion-button class="btn_action"  fill="clear" color="medium" (click)="execGetUSer()">
+<ion-icon slot="icon-only" name="refresh"></ion-icon>
+</ion-button> -->
+<!-- <br> -->
+<!-- <ion-button  class="btn_action" fill="solid" (click)="showEditDailog()">
+<ion-icon  slot="start" name="create"></ion-icon>ユーザ情報を編集
+</ion-button> 
+<ion-button  class="btn_action" color="warning" fill="solid" (click)="deleteUser()">
+<ion-icon slot="start" name="trash"></ion-icon>ユーザ削除
+</ion-button> -->

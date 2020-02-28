@@ -1,5 +1,7 @@
 {
   "name": "ShippingQR",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
