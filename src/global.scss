@@ -63,11 +63,12 @@ ion-split-pane{
       
 ion-toolbar{
     --color: #FFFFFF;
-    --background: none !important;
-      background-image: url('assets/img/toolbar_bg6.png') !important;
-      background-position: center center !important;
-      background-repeat: no-repeat !important;
-      background-size: cover !important;
+    --background: #0a1f36 !important; 
+    // --background: none !important;
+    //   background-image: url('assets/img/toolbar_bg6.png') !important;
+    //   background-position: center center !important;
+    //   background-repeat: no-repeat !important;
+    //   background-size: cover !important;
 }
 
   

@@ -8,7 +8,7 @@
             <ion-card  class="login_card" [hidden]="!MobileBrowser">
                 <ion-card-header class="login_card_header">
                         <div style="text-align: center; width: 100%; margin: 10px auto;"  (click)="redirect()">
-                                <img style="width: auto ; height: 50px; margin: 5px auto;" src="/assets/icon/inspector.png" >
+                                <img style="width: auto ; height: 50px; margin: 5px auto;" alt="Funadumi.net Inspector Logo" src="/assets/icon/inspector.png" >
                                 <label style="font-size: 20px; color : white">検査官ログインサービス</label>
                         </div>
                 </ion-card-header>
@@ -59,7 +59,7 @@
                             <div margin-vertical text-center>
                                 <button  type="submit" hidden></button> 
                                 
-                                <ion-button ion-button id="btn-confirm" expand="block" color="light" (click)="loginUser()">
+                                <ion-button ion-button id="btn-confirm-mobile" expand="block" color="light" (click)="loginUser()">
                                         <ion-icon name="unlock" slot="start">
                                         </ion-icon><b>ログイン</b>
                                 </ion-button>

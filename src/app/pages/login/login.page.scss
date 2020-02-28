@@ -1,10 +1,9 @@
 
-.login_content{
+.login_content {
     height: 100%;
     overflow: auto;
     background: linear-gradient(rgba(255, 255, 255, 0.237), rgba(0, 191, 255, 0.4) );
     background-size: cover;
-     
 }
 
 .footer_title {
@@ -32,7 +31,7 @@
     padding-top:30px;
 }
 
-#btn-confirm {
+#btn-confirm,#btn-confirm-mobile {
     height: 50px;
 }
 
@@ -53,8 +52,7 @@
 .card_content{
     margin: auto auto;
     max-width: 400px;
-    padding-bottom: 25px;
-   
+    padding-bottom: 25px; 
   }
 
 
@@ -91,7 +89,6 @@
     padding-top: 50px;
     vertical-align: top;
     display: inline-block;
-
 }
 
 .custom_div {

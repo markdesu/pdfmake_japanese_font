@@ -4,9 +4,7 @@
 
 export const environment = {
   production: false,
-api_address: 'http://192.168.0.3:3000'
-// api_address: 'localhost:3000'
-  //  api_address: 'https://nikkosoftware.com'
+  api_address: 'http://192.168.0.3:3000'
 };
 
 /*
