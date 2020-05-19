@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar> 
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>ダッシュボード</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="cd_home">  
+        <ion-card-header class="header">
+            <label style="font-size: 10px;">船積みネットへようこそ </label>
+            <br>
+            <label>{{authGuard.provider_name}}</label>
+        </ion-card-header>
+        <div class="div_actions">  
+            <div *ngFor="let x of quicklinks" class="div_buttons"  (click)="changeRoute(x.url)">
+                <div  class="img_con" >
+                    <ion-img  class="img" [src]="x.path"></ion-img>
+                </div>
+                <div class="div_label">
+                    <label>{{x.title}}</label>
+                    <br>
+                    <label style="color:gray; font-size:10px">{{x.desc}}</label>
+                </div>
+                <div class="div_count" *ngIf="x.icon == 'bus'"><label class="lbl_count">{{incoming}}</label></div>
+                <div class="div_count" *ngIf="x.icon == 'paper'"><label class="lbl_count2">{{completed}}</label></div>
+            </div>
+        </div>
+    </div>
+</ion-content>
+
+
+<!--............. Comment Area Below .............-->
+
+  

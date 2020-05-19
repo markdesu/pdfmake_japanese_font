@@ -28,18 +28,18 @@ export class MngCompanyPage implements OnInit {
  
   }
   
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     this.getCustomers();
   }
   
   getCustomers() {
-    this.management_API.getCustomers().subscribe(res =>{
-      if(res){
-        if(res.status == '401'){
+    this.management_API.getCustomers().subscribe(res => {
+      if(res) {
+        if(res.status == '401') {
             this.RequestAuth();
             return;
         }
-        if(res.data){
+        if(res.data) {
           this.dataSource = res.data;
         }
       }   
@@ -57,9 +57,9 @@ export class MngCompanyPage implements OnInit {
     dialogConfig.data = {ins_mng: true};
     var dailogref = this.Dialog.open(CreateCustomerComponent,dialogConfig);
 
-    dailogref.afterClosed().subscribe(res =>{   
-        if(res){
-            if(res.action === 1){
+    dailogref.afterClosed().subscribe(res => {   
+        if(res) {
+            if(res.action === 1) {
               this.createCustomer(res);
             }
         }    
@@ -85,23 +85,23 @@ export class MngCompanyPage implements OnInit {
                             
       var dailogref = this.Dialog.open(EditCustomerComponent,dialogConfig);
     
-      dailogref.afterClosed().subscribe(res =>{   
-          if(res){
-              if(res.action === 1){
-                this.updateCustomer(res);
-              }
-          }    
+      dailogref.afterClosed().subscribe(res => {   
+        if(res) {
+          if(res.action === 1) {
+            this.updateCustomer(res);
+          }
+        }    
       });
   }
   
   createCustomer(c_info) {
     this.management_API.createCustomer(c_info).subscribe(res => {
       if(res){
-        if(res.status == '401'){
-            this.RequestAuth();
-            return;
+        if(res.status == '401') {
+          this.RequestAuth();
+          return;
         }
-        if(res.status == '200'){
+        if(res.status == '200') {
           this.presentAlertOK('成功','顧客の詳細が更新されました。', 'alertSuccess');
           this.getCustomers();
         }
@@ -112,13 +112,13 @@ export class MngCompanyPage implements OnInit {
   updateCustomer(c_info) {
     this.management_API.updateCustomer(c_info).subscribe(res => {
       if(res){
-        if(res.status == '401'){
-            this.RequestAuth();
-            return;
+        if(res.status == '401') {
+          this.RequestAuth();
+          return;
         }
-        if(res.status == '200'){
+        if(res.status == '200') {
           this.presentAlertOK('成功','顧客が追加されました。', 'alertSuccess');
-            this.getCustomers();
+          this.getCustomers();
         }
       }   
     });
@@ -126,15 +126,15 @@ export class MngCompanyPage implements OnInit {
   
   deleteCustomer(customer_id) {
     this.presentAlertConfirm().then( res => {
-      if(res){
+      if(res) {
         this.management_API.deleteCustomer(customer_id).subscribe(res2 => {
-          if(res2){
-            if(res2.status == '401'){
+          if(res2) {
+            if(res2.status == '401') {
                 this.RequestAuth();
                 return;
             }
-            if(res2.data){
-              if(res2.data['affectedRows']){
+            if(res2.data) {
+              if(res2.data['affectedRows']) {
                 this.getCustomers();
               }
             }
@@ -208,7 +208,6 @@ export class MngCompanyPage implements OnInit {
     var currentURL = '/serviceadmin/mng-company';
     this.authGuard.logout();
     this.router.navigate(['/serviceadmin/index'], {queryParams : {url:currentURL}});
-
   }
  
 }

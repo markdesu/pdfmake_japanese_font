@@ -1,10 +1,14 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>ユーザー管理</ion-title>
-    <ion-buttons slot="start">
-        <ion-menu-button ></ion-menu-button>
-      </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>ユーザー管理</ion-title>
+        <ion-buttons slot="start" *ngIf="!MobileBrowser">
+        <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-back-button slot="start" *ngIf="MobileBrowser" [routerLink]="backURL" defaultHref="{{backURL}}"></ion-back-button>
+        <ion-buttons slot="end"  *ngIf="MobileBrowser">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>

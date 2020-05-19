@@ -50,23 +50,23 @@ export class MngContractsPage implements OnInit {
   
   async getParams() {
      await  this.route.queryParams.subscribe(params => {
-              if(params['customer_id']){
+              if(params['customer_id']) {
                 this.customer_id = params['customer_id']; 
               }       
             });
-            if(this.customer_id){
+            if(this.customer_id) {
               this.getContract(this.customer_id);
             }    
   }
   
   getCustomers() {
     this.management_API.getCustomers().subscribe(res => {
-      if(res){
-        if(res.status == '401'){
+      if(res) {
+        if(res.status == '401') {
             this.RequestAuth();
             return;
         }
-        if(res.data){
+        if(res.data) {
           this.customers = res.data;
         }
       }   
@@ -75,12 +75,12 @@ export class MngContractsPage implements OnInit {
   
   getProviders() {
     this.weighing_API.getProviders().subscribe(res => {
-      if(res){
-        if(res.status == '401'){
+      if(res) {
+        if(res.status == '401') {
             this.RequestAuth();
             return;
         }
-        if(res.data){
+        if(res.data) {
           this.providers = res.data;
           this.sel_provider = String(this.providers[0].id);
         }
@@ -90,12 +90,12 @@ export class MngContractsPage implements OnInit {
   
   getContract(customer_id) {
     this.management_API.getContracts(customer_id).subscribe(res => {
-      if(res){
-        if(res.status == '401'){
+      if(res) {
+        if(res.status == '401') {
             this.RequestAuth();
             return;
         }
-        if(res.data){
+        if(res.data) {
           this.dataSource = res.data;
           this.disableSearchChange();
           this.setContractDetails();
@@ -112,7 +112,7 @@ export class MngContractsPage implements OnInit {
     this.expires           = '';
     
     conract_arr.forEach(x => {
-      if(x.provider_id == this.sel_provider){
+      if(x.provider_id == this.sel_provider) {
           this.sel_contract_type = String(x.customer_type);
           this.vendor_code       = x.vendor_code;
           this.subvendor_code    = x.subvendor_code;
@@ -122,15 +122,15 @@ export class MngContractsPage implements OnInit {
   }
   
   execGetContract() {
-    if(this.customer_id){
+    if(this.customer_id) {
       this.getContract(this.customer_id);
     }
   }
   
   execContractChange() {
-    if(this.sel_contract_type == '0'){
+    if(this.sel_contract_type == '0') {
       this.deleteContract();
-    }else{
+    } else {
       this.updateContract();
     }
   }
@@ -139,7 +139,7 @@ export class MngContractsPage implements OnInit {
     if(!this.sel_provider && !this.customer_id) {
       return;
     }
-    var data ={
+    var data = {
        provider_id : this.sel_provider,
        customer_id : this.customer_id,
        customer_type : this.sel_contract_type ,
@@ -148,14 +148,14 @@ export class MngContractsPage implements OnInit {
        expires :  this.expires | 0
     }
     
-    this.management_API.updateContract(data).subscribe(res =>{
-      if(res){
-        if(res.status == '401'){
+    this.management_API.updateContract(data).subscribe(res =>{ 
+      if(res) {
+        if(res.status == '401') {
             this.RequestAuth();
             return;
         }
-        if(res.data){
-          if(res.data['affectedRows'] > 0){
+        if(res.data) {
+          if(res.data['affectedRows'] > 0) {
             this.presentAlertOK('成功','契約が更新されました。', 'alertSuccess');
             this.getContract(this.customer_id);
           }
@@ -170,13 +170,13 @@ export class MngContractsPage implements OnInit {
     }
     
     this.management_API.deleteContract(this.sel_provider, this.customer_id).subscribe(res => {
-      if(res){
-        if(res.status == '401'){
-            this.RequestAuth();
-            return;
+      if(res) {
+        if(res.status == '401') {
+          this.RequestAuth();
+          return;
         }
-        if(res.data){
-          if(res.data['affectedRows'] > 0){
+        if(res.data) {
+          if(res.data['affectedRows'] > 0) {
             this.presentAlertOK('成功','契約が終了しました。', 'alertSuccess');
             this.getContract(this.customer_id);
           }
@@ -210,7 +210,7 @@ export class MngContractsPage implements OnInit {
     }
   }
      
-  async presentAlertOK(title,message, cssclass) {
+  async presentAlertOK(title, message, cssclass) {
     var  choice = false;
     const alert = await this.alertController.create({
       header: title,
@@ -236,7 +236,6 @@ export class MngContractsPage implements OnInit {
     var currentURL = '/serviceadmin/mng-contracts';
     this.authGuard.logout();
     this.router.navigate(['/serviceadmin/index'], {queryParams : {url:currentURL}});
-
   }
   
 }

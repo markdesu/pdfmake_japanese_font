@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ManagementService } from '../../services/management.service';
-import { AlertController } from '../../../../node_modules/@ionic/angular';
+import { AlertController, Platform } from '../../../../node_modules/@ionic/angular';
 import { AuthguardService } from '../../services/authguard.service';
 import { Router } from '../../../../node_modules/@angular/router';
 
@@ -11,22 +11,31 @@ import { Router } from '../../../../node_modules/@angular/router';
 })
 export class UserSettingPage implements OnInit {
 
-  
   input_type = 'password';
   old_pass;
   new_pass;
   new_pass_v;
   
-  
   error_message = '';
   show_error = false;
+  
+  backURL = '/dashboard';
+  MobileBrowser = false;
+  
   
   constructor(private management_API : ManagementService,
               private alertController : AlertController,
               private authGuard : AuthguardService,
-              private router : Router) { }
+              private router : Router,
+              private platform : Platform) { }
 
   ngOnInit() {
+    this.MobileBrowser = this.isMobileBrowser();
+  }
+  
+  isMobileBrowser() {  
+    // is this web-browser on mobile device
+    return this.platform.is('mobileweb');
   }
   
   onViewDidEnter() {
@@ -54,16 +63,16 @@ export class UserSettingPage implements OnInit {
     }
     
     this.management_API.resetPassword(data).subscribe(res => {
-      if(res){
-        if(res.status == '401'){
-          //re authorized;
+      if(res) {
+        if(res.status == '401') {
+          this.RequestAuth();
         }else{
-          if(res.status == '200'){
-            if(res.data == 1){
+          if(res.status == '200') {
+            if(res.data == 1) {
               this.presentAlertOK('成功','パスワードが変更されました。', 'alertSuccess');
               this.clear();
-            }else 
-            if(res.data == 0){
+            } else 
+            if(res.data == 0) {
               this.error_message = '古いパスワードが正しくありません。';
               this.show_error = true;
             }
@@ -87,7 +96,7 @@ export class UserSettingPage implements OnInit {
     }
   }
   
-  async presentAlertOK(title,message, cssclass) {
+  async presentAlertOK(title, message, cssclass) {
     var  choice = false;
     const alert = await this.alertController.create({
       header: title,

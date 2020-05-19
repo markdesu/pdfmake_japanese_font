@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpErrorResponse,HttpInterceptor,HttpRequest, HttpHandler,HttpEvent, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse,HttpRequest, HttpHandler,HttpEvent} from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 const sha1 = require('sha1');
 const CryptoJS = require("crypto-js");
-
-
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type':'application/json'})
 };
 
 const management_url = environment.api_address + "/api/shippingmng";
+const accessUrl = environment.api_address + "/api/access";
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +27,6 @@ export class ManagementService {
     const sessionData = localStorage.getItem('Session');
     var session;
     
-    
     if(sessionData !== null) {
         var bytes  = CryptoJS.AES.decrypt(sessionData.toString(), '123');
         var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
@@ -36,13 +34,12 @@ export class ManagementService {
     } else {
         session = 'XXXXXXXXXXXXXXXXXXXXXXXXXX';
     }
-
-        var mytoken = 'XXXXXXXXXXXXXXXXXXXXXXXXXX';
+    
+    var mytoken = 'XXXXXXXXXXXXXXXXXXXXXXXXXX';
         
     if(idToken !== null) {
         mytoken=idToken;
     }
-    
     
     const new_headers = new HttpHeaders({
       'Session':  session,
@@ -56,7 +53,7 @@ export class ManagementService {
 
    //Company Users //////////////////////////////
    
-  createUser(data): Observable<any>{
+  createUser(data): Observable<any> {
     // data.password = sha1(data.password);
     return this.http.post(management_url+ '/createuser',data, httpOptions).pipe(
       map(this.extractData),
@@ -64,15 +61,25 @@ export class ManagementService {
   
   }
   
-  updateUser(data): Observable<any>{
+  updateUser(data): Observable<any> {
     return this.http.post(management_url + '/update/user',data,httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
     
   }
   
+  checkloginid(data): Observable<any> {
+    return this.http.post(management_url + '/checkloginid',data,httpOptions).pipe(
+      map(this.extractData),catchError(this.handleError));
+  }
+  
+  checkemail(data): Observable<any> {
+    return this.http.post(management_url + '/checkemail',data,httpOptions).pipe(
+      map(this.extractData),catchError(this.handleError));
+  }
     
-  deleteUser(user_id): Observable<any>{
+    
+  deleteUser(user_id): Observable<any> {
     return this.http.post(management_url + '/delete/user/'+ user_id,httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
@@ -80,14 +87,14 @@ export class ManagementService {
   }
   
   
-  getCustomers(): Observable<any>{
+  getCustomers(): Observable<any> {
     return this.http.get(management_url+ '/customers').pipe(
       map(this.extractData),
     catchError(this.handleError));
     
   }
   
-  getCustomerUsers(customer): Observable<any>{
+  getCustomerUsers(customer): Observable<any> {
     return this.http.get(management_url+ '/customerusers/'+ customer).pipe(
       map(this.extractData),
     catchError(this.handleError));
@@ -95,41 +102,41 @@ export class ManagementService {
   }
   
   
-  createCustomer(data): Observable<any>{
+  createCustomer(data): Observable<any> {
     return this.http.post(management_url+ '/createcustomer',data, httpOptions).pipe(
       map(this.extractData),
     catchError(this.handleError));
     
   }
   
-  updateCustomer(data): Observable<any>{
+  updateCustomer(data): Observable<any> {
     return this.http.post(management_url+ '/updatecustomer',data, httpOptions).pipe(
       map(this.extractData),
     catchError(this.handleError));
     
   }
   
-  deleteCustomer(customer_id): Observable<any>{
+  deleteCustomer(customer_id): Observable<any> {
     return this.http.post(management_url+ '/deletecustomer/'+ customer_id, httpOptions).pipe(
       map(this.extractData),
     catchError(this.handleError));
   }
   
-  getContracts(customer): Observable<any>{
+  getContracts(customer): Observable<any> {
     return this.http.get(management_url+ '/contracts/'+customer).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
   
   
-  updateContract(data): Observable<any>{
+  updateContract(data): Observable<any> {
     return this.http.post(management_url+ '/updatecontract',data, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
   
   
-  deleteContract(provider,customer): Observable<any>{
+  deleteContract(provider,customer): Observable<any> {
     return this.http.post(management_url+ '/deletecontract/'+ provider +'/'+customer,httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
@@ -138,39 +145,32 @@ export class ManagementService {
   
   //Inspector Users //////////////////////////////
   
-  getAllInspectors(provider): Observable<any>{
- 
+  getAllInspectors(provider): Observable<any> {
     return this.http.get(management_url+ '/inspectors/' + provider).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
   
-  
-    
-  createInspector(data): Observable<any>{
+  createInspector(data): Observable<any> {
     // data.password = sha1(data.password);
     return this.http.post(management_url+ '/create/inspector',data, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
-  
   }
   
-  updateInspector(data): Observable<any>{
+  updateInspector(data): Observable<any> {
     return this.http.post(management_url + '/update/inspector',data,httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
-    
   }
 
-
-  deleteInspector(inspector_id): Observable<any>{
+  deleteInspector(inspector_id): Observable<any> {
     return this.http.post(management_url + '/delete/inspector/'+ inspector_id,httpOptions).pipe(
       map(this.extractData),
-      catchError(this.handleError));
-    
+      catchError(this.handleError));   
   }
   
-  resetPassword(data): Observable<any>{
+  resetPassword(data): Observable<any> {
     data.password = sha1(data.password);
     data.new_password = sha1(data.new_password);
     return this.http.post(management_url + '/resetpassword/', data, httpOptions).pipe(
@@ -178,15 +178,23 @@ export class ManagementService {
       catchError(this.handleError));
   }    
   
-  private extractData(res: Response){
+  reissuePassword(data): Observable<any> {
+    // data.password = sha1(data.password);
+    return this.http.post(accessUrl + '/reissuepassword', data, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  
+  }
+  
+  private extractData(res: Response) {
     let body = res;
     return body || {};
   }
   
-  private handleError(error: HttpErrorResponse){
-    if(error.error instanceof ErrorEvent ){
+  private handleError(error: HttpErrorResponse) {
+    if(error.error instanceof ErrorEvent ) {
       console.error('An error occurred:', error.error.message);
-    }else{
+    } else {
       console.error(
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);

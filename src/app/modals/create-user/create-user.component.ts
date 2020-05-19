@@ -27,32 +27,31 @@ export class CreateUserComponent implements OnInit {
   
   ngOnInit() {  
     if(this.data.ins_form){
-          this.form_lbl_name = 'インスペクタ名';
+      this.form_lbl_name = 'インスペクタ名';
     }
   }
   
   validate() {
     this.error_status = '';
     this.hide_error = true;
-    if(this.create_data.login_id != '' && this.create_data.name != ''  && this.create_data.email != ''){
-   
-        return true;    
+    if(this.create_data.login_id != '' && this.create_data.name != ''  && this.create_data.email != '') {
+      return true;    
     }
-      this.showError();
-      return false;
+    this.showError();
+    return false;
   }
   
   createUser() {
-    if(this.validate()){
-        this.create_data.is_admin  = this.setAuth(this.is_admin);
-        this.create_data.is_inspector = this.setAuth(this.is_inspector);
-        this.create_data.action = 1;
-           
-        if(this.data['ins_form'] == true){    
-          delete  this.create_data.is_admin; 
-          delete  this.create_data.is_inspector; 
-        }
-        this.dialogRef.close(this.create_data);
+    if(this.validate()) {
+      this.create_data.is_admin  = this.setAuth(this.is_admin);
+      this.create_data.is_inspector = this.setAuth(this.is_inspector);
+      this.create_data.action = 1;
+          
+      if(this.data['ins_form'] == true) {    
+        delete  this.create_data.is_admin; 
+        delete  this.create_data.is_inspector; 
+      }
+      this.dialogRef.close(this.create_data);
     }
   }
   
@@ -61,7 +60,6 @@ export class CreateUserComponent implements OnInit {
     this.error_status = '誤り:必要な情報をすべて入力してください。';
     var x = document.getElementById('create');
     x.scrollTop = 0 ;
-  
   }
   
   close() {
@@ -75,6 +73,5 @@ export class CreateUserComponent implements OnInit {
     }
       return 0;
   }
-  
-  
+
 }

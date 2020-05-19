@@ -1,45 +1,37 @@
-<!-- <ion-header class="login_header">
-    <ion-toolbar class="login_toolbar">
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header> -->
-  <ion-content>  
-        <div class="login_content">
-            <ion-card  class="login_card" >  
-                <ion-card-header class="login_card_header">
-                        <div style="text-align: center; width: 100%; margin: 10px auto; " >
-                        <img style="width: auto ; height: 60px; margin: 5px auto; " src="/assets/icon/admin2.png" >
-                        <label style="font-size: 20px; color : white">システム管理ログインサービス</label>
-                    </div>
-                    <br>
-                    <b class="login_status">{{loginStatus}}</b>
-                </ion-card-header>
-                <ion-card-content class="card_content">
-                        <form name="form2" (ngSubmit)="loginUser()">
-                    <ion-item color="transparent">
-                        <ion-label position="floating">ログインID</ion-label>
-                        <ion-input type="text"  [(ngModel)]="username" name="username"></ion-input>
-                    </ion-item>
-                    <ion-item color="transparent">
-                        <ion-label position="floating">パスワード</ion-label>
-                        <ion-input type="password"  [(ngModel)]="password" name="password" ></ion-input>
-                    </ion-item>
-                    <br>
-                    <div margin-vertical text-center>
-                        <button  type="submit" hidden></button> 
-                        
-                        <ion-button ion-button id="btn-confirm" expand="block" color="light" (click)="loginUser()">
-                                <ion-icon name="unlock" slot="start">
-                                </ion-icon><b>ログイン</b>
-                        </ion-button>
-                    </div>
-                </form> 
-                </ion-card-content>
-            </ion-card>       
-        </div>
-  </ion-content>
+<ion-content>  
+    <div class="login_content">
+        <ion-card  class="login_card" >  
+            <ion-card-header class="login_card_header">
+                <div style="text-align: center; width: 100%; margin: 10px auto;">
+                    <img style="width: auto ; height: 60px; margin: 5px auto; " src="/assets/icon/admin2.png">
+                    <label style="font-size: 20px; color : white">システム管理ログインサービス</label>
+                </div>
+                <br>
+                <b class="login_status">{{loginStatus}}</b>
+            </ion-card-header>
+            <ion-card-content class="card_content">
+                    <form name="form2" (ngSubmit)="loginUser()">
+                <ion-item color="transparent">
+                    <ion-label position="floating">ログインID</ion-label>
+                    <ion-input type="text"  [(ngModel)]="username" name="username"></ion-input>
+                </ion-item>
+                <ion-item color="transparent">
+                    <ion-label position="floating">パスワード</ion-label>
+                    <ion-input type="password"  [(ngModel)]="password" name="password" ></ion-input>
+                </ion-item>
+                <br>
+                <div margin-vertical text-center>
+                    <button  type="submit" hidden></button> 
+                    <ion-button ion-button id="btn-confirm" expand="block" color="light" (click)="loginUser()">
+                            <ion-icon name="unlock" slot="start">
+                            </ion-icon><b>ログイン</b>
+                    </ion-button>
+                </div>
+            </form> 
+            </ion-card-content>
+        </ion-card>       
+    </div>
+</ion-content>
            
   
   

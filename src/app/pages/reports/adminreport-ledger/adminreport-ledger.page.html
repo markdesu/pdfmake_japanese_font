@@ -1,95 +1,70 @@
 <ion-header>
-  <ion-toolbar>
-    <!-- Admin Ledger Report -->
-    <ion-title>管理用元帳</ion-title>
-        <ion-buttons slot="start">
-              <ion-back-button defaultHref="/generate-report"></ion-back-button>
-          </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar>
+        <!-- Admin Ledger Report -->
+        <ion-title>管理用元帳</ion-title>
+            <ion-buttons slot="start">
+                <ion-back-button defaultHref="/generate-report"></ion-back-button>
+            </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  
-<div class="div_content">
-    <div class="div_resultmenu">
-        <label class="lbl_param"><b>日付範囲: </b> {{from_date}} - {{to_date}}</label>
-        <br>
-        <label class="lbl_param"><b>納入業者: </b> {{vendor_name}}</label>
-        <label class="lbl_param"><b>  船名: </b> {{subvendor_name}}</label>
-        <br>
-        <label class="lbl_result">{{lblResult}}</label>
-        <ion-button  class="btn_download" fill="outline" [hidden]="hide_btndl" size="small" (click)="downloadCSV()"> <ion-icon name="download" slot="start"></ion-icon>このデータを CSV で保存</ion-button>     
-        <div class="div_toggle">
-            <label class="lbl_show">合計のみ表示 </label>
-            <ion-toggle [(ngModel)]="total_only"></ion-toggle>
+    <div class="div_content">
+        <div class="div_resultmenu">
+            <label class="lbl_param"><b>日付範囲: </b> {{from_date}} - {{to_date}}</label>
+            <br>
+            <label class="lbl_param"><b>納入業者: </b> {{vendor_name}}</label>
+            <label class="lbl_param"><b>  船名: </b> {{subvendor_name}}</label>
+            <br>
+            <label class="lbl_result">{{lblResult}}</label>
+            <ion-button  class="btn_download" fill="outline" [hidden]="hide_btndl" size="small" (click)="downloadCSV()"> <ion-icon name="download" slot="start"></ion-icon>このデータを CSV で保存</ion-button>     
+            <ion-button  class="btn_download" fill="outline" [hidden]="hide_btndl" size="small" (click)="exportPDF()"> <ion-icon name="download" slot="start"></ion-icon>PDFにエクスポート</ion-button>       
+            <div class="div_toggle">
+                <label class="lbl_show">合計のみ表示 </label>
+                <ion-toggle [(ngModel)]="total_only"></ion-toggle>
+            </div>
         </div>
-    </div>
-    <div class="div_tblcont">
-        <table class="tbl_result" border="1">  
-            <tr>
-               
-                <th>日付</th>       <!-- Delivery Date -->             
-                <th>伝票No</th>     <!-- Weighing No -->        
-                <th>車番</th>       <!-- Car No -->      
-                <th>船名</th>       <!-- Ship Name -->
-                <th>代納業者</th>    <!-- Subvendor Name -->                      
-                <th>正味重量</th>    <!-- Net Weight -->                
-                <th colspan = "2">スケール引</th><!-- Reduced Percent /   Reduced Weight -->   
-                <th>商品</th>       <!-- Item Name -->   
-                <th>取引重量</th>    <!-- Verified Weight -->                          
-                <th>時間</th>       <!-- Tare Time -->   
-                                 
-            </tr>
-            <!-- <ng-container  border="1" *ngFor="let ledger of array_ledger">
-                    <tr>
-                        <td class="td_vtotalname">{{ledger.delivery_date}}</td>
-                        <td>{{ledger.weighing_no}}</td>
-                        <td>{{ledger.car_no}}</td>
-                        <td>{{ledger.ship_name}}</td>
-                        <td>{{ledger.subvendor_name}}</td>
-                        <td>{{ledger.net_weight | number}}</td>
-                        <td>{{ledger.reduced_percent}}</td>
-                        <td>{{ledger.reduced_weight | number}}</td>
-                        <td>{{ledger.item_name}}</td>
-                        <td>{{ledger.verified_weight | number}}</td>
-                        <td>{{ledger.tare_time}}</td>
-                    </tr> 
-            </ng-container> -->
-            
-            <ng-container  *ngFor="let ledger of result" border="1" >
-                <tr [hidden]="total_only">
-                    <td class="td_sub" colspan="14">{{ledger.subvendor_name}}</td>
+        <div class="div_tblcont">
+            <table class="tbl_result" border="1">  
+                <tr>
+                    <th>日付</th>       <!-- Delivery Date -->             
+                    <th>伝票No</th>     <!-- Weighing No -->        
+                    <th>車番</th>       <!-- Car No -->      
+                    <th>船名</th>       <!-- Ship Name -->
+                    <th>代納業者</th>    <!-- Subvendor Name -->                      
+                    <th>正味重量</th>    <!-- Net Weight -->                
+                    <th colspan = "2">スケール引</th><!-- Reduced Percent /   Reduced Weight -->   
+                    <th>商品</th>       <!-- Item Name -->   
+                    <th>取引重量</th>    <!-- Verified Weight -->                          
+                    <th>時間</th>       <!-- Tare Time -->    
                 </tr>
                 
-                <tr [hidden]="total_only" *ngFor="let sub_ledger of ledger.subvendor_list" >
-                  
-                    <td class="td_vtotalname">{{sub_ledger.delivery_date}}</td>
-                    <td>{{sub_ledger.weighing_no}}</td>
-                    <td>{{sub_ledger.car_no}}</td>
-                    <td>{{sub_ledger.ship_name}}</td>
-                    <td>{{sub_ledger.subvendor_name}}</td>
-                    <td>{{sub_ledger.net_weight | number}}</td>
-                    <td>{{sub_ledger.reduced_percent}}</td>
-                    <td>{{sub_ledger.reduced_weight | number}}</td>
-                    <td>{{sub_ledger.item_name}}</td>
-                    <td>{{sub_ledger.verified_weight | number}}</td>
-                    <td>{{sub_ledger.tare_time}}</td>
-                  </tr>
-                  
-                  <tr class="tr_subvTotal">
-                    <td class="td_sub"  colspan="5">{{ledger.subvendor_name}}計</td>
-                    <td>{{ledger.net_total | number}}</td>
-                    <td colspan="3"></td>
-                    <td>{{ledger.verified_total | number}}</td>
-                    <td> </td>
-                    
-              </tr>
-            </ng-container> 
-                
-                
-                
-            <tr class="td_total">
-                
+                <ng-container  *ngFor="let ledger of result" border="1">
+                    <tr [hidden]="total_only">
+                        <td class="td_sub" colspan="14">{{ledger.subvendor_name}}</td>
+                    </tr>      
+                    <tr [hidden]="total_only" *ngFor="let sub_ledger of ledger.subvendor_list">
+                        <td class="td_vtotalname">{{sub_ledger.delivery_date}}</td>
+                        <td>{{sub_ledger.weighing_no}}</td>
+                        <td>{{sub_ledger.car_no}}</td>
+                        <td>{{sub_ledger.ship_name}}</td>
+                        <td>{{sub_ledger.subvendor_name}}</td>
+                        <td>{{sub_ledger.net_weight | number}}</td>
+                        <td>{{sub_ledger.reduced_percent}}</td>
+                        <td>{{sub_ledger.reduced_weight | number}}</td>
+                        <td>{{sub_ledger.item_name}}</td>
+                        <td>{{sub_ledger.verified_weight | number}}</td>
+                        <td>{{sub_ledger.tare_time}}</td>
+                    </tr>          
+                    <tr class="tr_subvTotal">
+                        <td class="td_sub"  colspan="5">{{ledger.subvendor_name}}計</td>
+                        <td>{{ledger.net_total | number}}</td>
+                        <td colspan="3"></td>
+                        <td>{{ledger.verified_total | number}}</td>
+                        <td> </td>
+                    </tr>
+                </ng-container> 
+                <tr class="td_total">
                     <td class="td_vtotalname" colspan="4">合計</td>
                     <td>{{ledger_count}} 件</td>
                     <td>{{netw_total | number}}</td>
@@ -97,9 +72,8 @@
                     <td>{{verifiedw_total | number}}</td>
                     <td></td>
                 </tr> 
-         
-        </table>
-    </div>
-</div>  
+            </table>
+        </div>
+    </div>  
 </ion-content>
  

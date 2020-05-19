@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WeighingPage } from './weighing.page';
+import { ReissuePasswordPage } from './reissue-password.page';
 
-describe('WeighingPage', () => {
-  let component: WeighingPage;
-  let fixture: ComponentFixture<WeighingPage>;
+describe('ReissuePasswordPage', () => {
+  let component: ReissuePasswordPage;
+  let fixture: ComponentFixture<ReissuePasswordPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WeighingPage ],
+      declarations: [ ReissuePasswordPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WeighingPage);
+    fixture = TestBed.createComponent(ReissuePasswordPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

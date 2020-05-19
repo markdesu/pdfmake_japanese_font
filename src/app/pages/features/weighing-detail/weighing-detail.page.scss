@@ -1,70 +1,69 @@
 
 
-.cont_card1{
+.cont_card1 {
     margin-top: 5px;
     max-width: 1000px; 
-
 }
 
-.cont_card2{
+.cont_card2 {
     margin: 0 auto;
     margin-top: 15px;
     max-width: 1000px; 
     background: #fcc592;
     padding:15px 10px;
-    
 }
-.div_error{
+
+.div_error {
     padding-left: 10px;
     padding-right: 10px;
 }
 
-.select{
-    text-align: left;
-    // padding: 10px;
-    max-height: 45px !important;
-    width: 100%;
-    max-width:   200px;
+.select {
+    height: 40px;
+    max-height: 40px;
+    margin: auto 5px;
+    margin-left: 13px;
     border-radius: 4px;
+    text-align: left;
     overflow: hidden;
     color: #3e7cab;
+    font-weight: bold;
+}
+
+.select_item {
+    background: #161825e6;
+    color: #62ff00;
 }
 
 
-
-.col1{
-    // max-width: 100%;
-    // max-width:200px;
-    // border:solid red;
-    // margin:0 auto;
+.col1_1 {
     text-align: center;
-
+    max-width:   180px;
 }
 
-.div_item0{
+.col1 {
     text-align: center;
-    // margin-top: 10px;
+}
+
+.div_item0 {
+    text-align: center;
     padding: 15px;
-    // border: solid green;
 }
 
-.item1{
-    // border:solid red;
+.item1 {
     padding: 0px !important;
-
 }
-
 
 
 // Divs //////////////////////////////////////////////////////////////////////////////////////
 
-.div_header_area{
+.div_header_area {
     margin: 8px auto;
     padding: 15px;
     color : #50a25cf0;
 }
 
-.div_card1{
+.div_card1 {
     padding-right: 10px;
     width: 100%;
     max-width: 40%;
@@ -74,7 +73,7 @@
     padding-bottom: 15px;
 }
 
-.div_card2{
+.div_card2 {
     max-width: 60%;
     width: 100%;
     display: inline-block;
@@ -84,22 +83,21 @@
 }
 
 
-.div_sub1{
+.div_sub1 {
     width: 100%;
     text-align: left;
     padding: 15px;
     margin: 0 5px;
     margin-bottom: 5px;
-    // border-bottom: solid 2px rgb(231, 231, 231)
-     background: #f0f5fb;
+    background: #f0f5fb;
 }
 
-.div_cont1{
+.div_cont1 {
     padding: 5px;
     text-align: center;
 }
 
-.div_cardm{
+.div_cardm {
    width: 100%;
    text-align: center; 
    box-shadow: 0px 0px 1px 0px #3e7cab9f;
@@ -109,7 +107,7 @@
    margin-bottom: 10px;
 }
 
-.div_row{    
+.div_row {    
    width: 100%;
    padding:0px;
    margin: 0 auto;
@@ -118,73 +116,89 @@
 }
 
 
-.div_item{
+.div_item {
     width: 100%;
-    height: 37px;
-    margin: 5px auto;
+    margin: 0 auto;
     padding-top:10px;
     padding-right:10px;
     border-radius: 3px;
     text-align: right;
     background-color: #e5f0fb;
+    height: 40px;
 }
 
 
 // Inputs ////////////////////////////////////////////////////////////////////////////////////
 
-.input{
+.input {
    text-align: right;
    margin-top:3px;
    border-radius: 4px;
    width: 100%;
-   background-color: #d4ebfc6c;
-    
 }
 
-.input2{
+.input_color {
+    background-color: #d4ebfc6c;
+}
+
+.reduce_item {
+    background: #ffb300;
+    color: #000000;
+}
+
+.reducebolder {
+    font-weight: bold;
+}
+
+.input2 {
    margin-left: 3px;
 }
 
-.input3{
+.input3 {
     text-align: left;
-    // margin-top:3px;
     border-radius: 4px;
     padding-left: 5px;
-    
     width: 95%;
     margin: 3px 15px;
+    height: 40px;
+    max-height: 40px;
     background-color: #d4ebfc6c;
  }
 
-.in_dust{
+.in_dust {
     width: 45%;
+}
+
+.inspection {
+    color:#00650f;
+    font-weight: bold;
 }
 
 // Labels ////////////////////////////////////////////////////////////////////////////////////
 
-.lbl_weighing{
+.lbl_weighing {
     padding-top:10px;
     height: 25px;
     display: inline-block;
     font-size: 13px;
 }
 
-.lbl_reduce{
+.lbl_reduce {
     color: rgb(211, 134, 102);
 }
 
-.lbl_total{
+.lbl_total {
     font-weight: bold;
 }
 
-.lbl_holder{
+.lbl_holder {
     vertical-align: middle;
     padding-top: 15px;
     color: #515151;
     margin: 0 5px;
 }
 
-.lbl_grade{
+.lbl_grade {
     text-align: left;
     float: left;
     padding-left:15px;
@@ -192,31 +206,26 @@
     width: 100%;    
 }
 
-.lbl_dust{
+.lbl_dust {
     text-align: left;
     float: left;
-    // padding-left:15px;
     margin-bottom: 5px;
     font-weight: bold;
     width: 100%;    
 }
 
-
-.lbl_field{
+.lbl_field {
     font-weight: normal;
     font-size: 14px;
 }
 
-
-.lbl_dtitle{
-    // font-weight: bold;   
+.lbl_dtitle {
     font-size: 20px;
     margin-top:20px;
-    // margin-bottom: 10px;
     color: #3e7cab;
 }
 
-.lbl_statusSave{
+.lbl_statusSave {
     padding-top: 10px;
     color: #fc0101;
     font-weight: bold;
@@ -225,14 +234,13 @@
 
 // Buttons ////////////////////////////////////////////////////////////////////////////////////
 
-.btn_save{
+.btn_save {
     margin: 10px;
     margin-top:20px;
     margin-bottom: 20px;
 }
 
-
-.btn_nav{
+.btn_nav {
     vertical-align: top;  
 }
 
@@ -244,7 +252,6 @@ ion-col{
     margin:0px;
 }
 
-
 ion-input {
     --padding-end: 5px;
 }
@@ -252,79 +259,67 @@ ion-input {
 .item_wdetails{
     color: #3e7cab;
 }
-// ion-content{
-  
-//   height: auto;
-// }
 
 @media screen and (min-width: 750px) {
 
-    .cont_card1{
+    .cont_card1 {
         margin-left: auto;
         margin-right:  auto;
         padding-right: 10px;
         padding-left: 10px;
     }
 
-    .btn_save{
+    .btn_save {
         margin: 10px auto;
         margin-top:20px;
         margin-bottom:15px;
         max-width: 300px;
     }
   
-    .select{
+    .select {
         max-width: 100%;
     }
     
     
-    .col0{
+    .col0 {
         max-width: 200px;
         margin: 0 auto;
     }
     
-    .div_card1{
+    .div_card1 {
         padding: 25px;
-        // box-shadow: 1px 1px 1px 1px #5d5d5d28;
     }
    
-   .div_card2{
+   .div_card2 {
         padding: 25px;   
     }
-   
    
 }
 
 @media screen and (max-width: 630px) {
 
-    .div_card1{
+    .div_card1 {
         max-width: 100%;
     }
     
-    .cont_card1{
+    .cont_card1 {
         margin-left: 0;
-        margin-right:  0;
-        margin-left:5px;
-        margin-right:  5px;
-        // height: 1300px;
+        margin-right: 0;
+        margin-left: 5px;
+        margin-right: 5px;
     }
 
-    
-// .div_main{
-//   overflow-y: auto;
-// }
-    .div_card2{
+    .div_card2 {
         max-width: 100%;
         box-shadow: none;
     }
       
-    .div_cardm{
+    .div_cardm {
         box-shadow: none;
     }
     
-    .select{
-         max-width:   140px;
-    
+    .select {
+         max-width: 140px;
     }
     
 }

@@ -1,14 +1,18 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>着信車</ion-title>
-    <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>着信車</ion-title>
+        <ion-buttons slot="start" *ngIf="!MobileBrowser">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-back-button slot="start" *ngIf="MobileBrowser" [routerLink]="backURL" defaultHref="{{backURL}}"></ion-back-button>
+        <ion-buttons slot="end"  *ngIf="MobileBrowser">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-card class="card_cont">
+    <div class="card_cont">
         <ion-card-header>
             <ion-card-title>
                 車両リスト  
@@ -28,11 +32,8 @@
                 </ion-item>
             </ion-list>
         </div>
-    </ion-card>
+    </div>
 </ion-content>
-
-
-
 
 
 <!--.............. Comment Area Below ............. -->

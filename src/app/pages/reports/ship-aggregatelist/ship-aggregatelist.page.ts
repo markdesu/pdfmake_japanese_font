@@ -11,7 +11,11 @@ import { ReportService } from '../../../services/report.service';
   styleUrls: ['./ship-aggregatelist.page.scss'],
 })
 export class ShipAggregatelistPage implements OnInit {
-  constructor(private route : ActivatedRoute, private reportAPI : ReportService, private authGuard : AuthguardService, private router : Router, public events : Events ) {
+  constructor(private route : ActivatedRoute, 
+              private reportAPI : ReportService, 
+              private authGuard : AuthguardService, 
+              private router : Router, 
+              public events : Events ) {
       
     events.subscribe('shipaggregate', () => {
         this.ngOnInit();
@@ -26,6 +30,7 @@ export class ShipAggregatelistPage implements OnInit {
     to_date     : any;
     vendor_name;
     vendor_code : any;
+    
     // Strings and Numbers //////////
     lblResult = '';
     ntotal    = 0;
@@ -39,50 +44,44 @@ export class ShipAggregatelistPage implements OnInit {
     hide_btndl = true;
     total_only = false;
     
- 
-  
     ngOnInit() {
       
       //Get URL parameters////
-      this.getParams();  
-      if (this.provider_id && this.vendor_code  && this.ship_code && this.from_date && this.to_date) {
-              var data = {
-                  "provider_id" : this.provider_id,
-                  "ship_code"   : this.ship_codes,
-                  "from_date"   : this.from_date,
-                  "to_date"     : this.to_date,
-                  "vendor_code" : this.vendor_code,
-                         };
-                         
+        this.getParams();  
+        if (this.provider_id && this.vendor_code  && this.ship_code && this.from_date && this.to_date) {
+            var data = {
+                        "provider_id" : this.provider_id,
+                        "ship_code"   : this.ship_codes,
+                        "from_date"   : this.from_date,
+                        "to_date"     : this.to_date,
+                        "vendor_code" : this.vendor_code,
+                        };
+                        
             this.reportAPI.getShipAggregateListReport(data).subscribe(res => {
                 if (res) {
                     if (res.status != '401') {
                         if (res.data.length > 0) {  
-                             this.main_result = res.data;
-                             console.log(this.main_result);
-                            //  this.setGrouping();
-                            // this.hide_btndl = false;
-                            // this.lblResult = '';
+                            this.main_result = res.data;
                         } else {
                             this.lblResult = 'レコードが見つかりません';
                             this.hide_btndl = true;
                         }
                     } else {
-                      this.authGuard.logout();
-                      this.router.navigate(['/login'], {queryParams : {url: '/report-ship', topic: 'shipaggregate'}});
+                    this.authGuard.logout();
+                    this.router.navigate(['/login'], {queryParams : {url: '/report-ship', topic: 'shipaggregate'}});
                     }
                 }
             });
-      } else {
-         this.lblResult = '無効なパラメータ';
-      }
+        } else {
+            this.lblResult = '無効なパラメータ';
+        }
     }
   
     ngOnDestroy(): void {
        this.events.unsubscribe('shipaggregate');
     }
     
-    setGrouping(): void{
+    setGrouping(): void {
         var ship = new Set(this.main_result.map(x => x.ship_code));
       
         ship.forEach(x => {
@@ -91,7 +90,7 @@ export class ShipAggregatelistPage implements OnInit {
             var ship_name;
             
           for (let y = 0; y < this.main_result.length; y++) {
-                if(arr[y].ship_code == x){
+                if(arr[y].ship_code == x) {
 
                     var group_obj = {},
                         group_dt  = {},       
@@ -118,35 +117,37 @@ export class ShipAggregatelistPage implements OnInit {
                     
                     var check_hatch = sub.find(r => r.hatch_no == hatch_c);
                     var edit_hatch = hatch_c;
-                    if(edit_hatch == 0){
+                    
+                    if(edit_hatch == 0) {
                         edit_hatch = '';
-                    }else{
+                    } else {
                         edit_hatch = hatch_c + 'ハッチ';
                     }
+                    
                     hatch_obj['hatch_no'] = hatch_c;
                     hatch_obj['hatch_name'] = edit_hatch;
                     hatch_obj['details'] = [];
                     
-                    if(!check_hatch){
+                    if(!check_hatch) { 
                         sub.push(hatch_obj);
                     }
                 
                     sub.forEach(el => {
-                        if(el.hatch_no == hatch_c){         
-                            if(el.details.length > 0 ){
+                        if(el.hatch_no == hatch_c) {         
+                            if(el.details.length > 0 ) {
                                 var checker = el.details.find(r => r.group_code == group_c);
                                 if(!checker){                     
                                     el.details.push(group_obj);
                                 } 
                                 el.details.forEach(element => {
-                                    if(element.group_code == group_c){
+                                    if(element.group_code == group_c) {
                                         element.group_details.push(group_dt);
                                     }
                                 });
-                            }else{
+                            } else {
                                 el.details.push(group_obj);
                                 el.details.forEach(element => {
-                                    if(element.group_code == group_c){
+                                    if(element.group_code == group_c) {
                                         element.group_details.push(group_dt);
                                     }
                                 });
@@ -163,23 +164,22 @@ export class ShipAggregatelistPage implements OnInit {
     }
     
     getParams() {
-      this.route.queryParams.subscribe(qparams => {
-          if (qparams.provider_id &&  qparams.vendor_code && qparams.ship_code && qparams.from_date && qparams.to_date) {    
-              this.provider_id = qparams.provider_id;
-              this.ship_code   = qparams.ship_code;
-              this.ship_codes  = qparams.ship_code;
-              this.vendor_code = qparams.vendor_code;
-              this.vendor_name = qparams.vendor_name;
-              this.ship_name   = qparams.ship_name;
-              this.from_date   = qparams.from_date;
-              this.to_date     = qparams.to_date;
-          }
-      });
+        this.route.queryParams.subscribe(qparams => {
+            if (qparams.provider_id &&  qparams.vendor_code && qparams.ship_code && qparams.from_date && qparams.to_date) {    
+                this.provider_id = qparams.provider_id;
+                this.ship_code   = qparams.ship_code;
+                this.ship_codes  = qparams.ship_code;
+                this.vendor_code = qparams.vendor_code;
+                this.vendor_name = qparams.vendor_name;
+                this.ship_name   = qparams.ship_name;
+                this.from_date   = qparams.from_date;
+                this.to_date     = qparams.to_date;
+            }
+        });
     }
      
-    getGroupTotal(ship_code,group_code, field, arr){
+    getGroupTotal(ship_code,group_code, field, arr) {
         var allTotal = 0;
-        
         for (let x = 0; x < arr.length; x++) {   
             if(arr[x].ship_code == ship_code && arr[x].group_code == group_code) {
                 allTotal = allTotal + arr[x][field];   
@@ -190,7 +190,6 @@ export class ShipAggregatelistPage implements OnInit {
     
     getShipTotal(ship_code,field,arr) {
         var allTotal = 0;
-        
         for (let x = 0; x < arr.length; x++) {   
             if(arr[x].ship_code == ship_code) {
                 allTotal = allTotal + arr[x][field];   
@@ -199,24 +198,22 @@ export class ShipAggregatelistPage implements OnInit {
         return allTotal;
     }
     
-    getOverallTotal(field,arr){
+    getOverallTotal(field,arr) {
         var Total = 0;
         for (let x = 0; x < arr.length; x++) {   
-            
-                Total = Total + arr[x][field];   
+            Total = Total + arr[x][field];   
         }
         return Total;
     }
     
-    countWeighing(ship_code, arr){
+    countWeighing(ship_code, arr) {
         var temp_arr = [];
-        
         for (let x = 0; x < arr.length; x++) {   
             if(arr[x].ship_code == ship_code) {
                 var splits = arr[x].slip_no.split(',');
                 splits.forEach(z => {
                 var check = temp_arr.includes(z)
-                    if(!check){
+                    if(!check) {
                         temp_arr.push(z);
                     }
                 });       

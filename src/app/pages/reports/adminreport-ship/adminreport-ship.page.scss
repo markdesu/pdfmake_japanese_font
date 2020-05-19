@@ -6,7 +6,6 @@
 .div_resultmenu {
     width: 100%;
     margin: auto auto;
-    // min-width: 600px;
     max-width: 1035px;
 }
 
@@ -85,14 +84,12 @@ td {
 
 .tbl_total {
     width: 100%;    
-    // min-width: 600px;
     margin: 10px auto;
     max-width: 1035px;
 }
 
 .tbl_total th {
     color: #ffffff;
-
     background-color: #7c7c7c;
 }
 
@@ -101,7 +98,6 @@ td {
     font-weight: 500;
 }
 
-
 // Buttons and Labels //////////////////////////////////////////
 
 .btn_download {
@@ -109,32 +105,24 @@ td {
     margin-top: 5px;
 }
 
-
 .lbl_result {
     color: #fc0101;
     font-weight: 500;
 }
 
-
 .lbl_show {
     vertical-align: middle;
     font-size: 12px; 
 }
+
 .lbl_param {
     font-size: 12px;
 }
-
-
-
-
-
 
 ion-toggle {
     vertical-align: middle;
     zoom: 0.6;
 }
-
-
 
 
 // Add Color on columns for readability//////////////////////////
@@ -163,7 +151,7 @@ ion-toggle {
 }
 
 
-@media screen and (max-width: 630px)  {
+@media screen and (max-width: 630px) {
 
     tr {
         font-size: 9px; 
@@ -171,7 +159,6 @@ ion-toggle {
     
     .tr_vname {
         font-size: 11px;
-     
     }
     
     .lbl_show {
@@ -185,13 +172,10 @@ ion-toggle {
     
     .div_tblcont {
         padding: 0px;
-      
     }
+    
     .tbl_result {
-
         min-width: 300px;
-      
-        
     }
     
 }

@@ -5,10 +5,10 @@
 </ion-header>
 <ion-content>
     <div class="login_content">
-            <ion-card  class="login_card" [hidden]="!MobileBrowser">
+            <ion-card  class="login_card" style="background: url('/assets/img/login_ins_bgm_2.png') no-repeat ;   background-size: cover; background-color: #ffffff36;" [hidden]="!MobileBrowser">
                 <ion-card-header class="login_card_header">
                         <div style="text-align: center; width: 100%; margin: 10px auto;"  (click)="redirect()">
-                                <img style="width: auto ; height: 50px; margin: 5px auto;" alt="Funadumi.net Inspector Logo" src="/assets/icon/inspector.png" >
+                                <img style="width: auto ; height: 50px; margin: 5px auto;" alt="Funadumi.net Inspector Logo" src="/assets/icon/inspector_1.png" >
                                 <label style="font-size: 20px; color : white">検査官ログインサービス</label>
                         </div>
                 </ion-card-header>
@@ -40,7 +40,8 @@
             </ion-card>       
             <ion-card  class="login_card2" [hidden]="MobileBrowser">
                 <div  class="card2_div">                      
-                    <div class="card2_div1"></div>
+                    <div class="card2_div1" style="background: url('../../../assets/img/login_ins_bg4_2.png') no-repeat ;
+                    background-size: cover;"></div>
                     <div  class="card2_div2">
                         <div style="min-height: 50px;">
                             <b class="login_status" >{{loginStatus}}</b>
@@ -73,6 +74,6 @@
 
 <ion-footer>
        <div class="div_footer">
-            <ion-title class="footer_title">日光ソフトウェアを搭載</ion-title>
+            <ion-title class="footer_title">日興ソフトウェアが開発</ion-title>
        </div>
 </ion-footer> 

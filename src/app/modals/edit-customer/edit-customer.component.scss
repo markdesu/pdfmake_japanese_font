@@ -29,7 +29,7 @@
     width: 100%;
 }
 
-.dialog{ 
+.dialog { 
     width: 500px;
 }
 
@@ -53,7 +53,6 @@
     display: inline-block;
     font-weight: 500;
     margin-top: 12px;
-   
 }
 
 .btn_close {
@@ -64,28 +63,28 @@
 
 @media screen and (max-width: 630px) {
     
-    .div_create{
+    .div_create {
         text-align: left;
         width: 100%;
         min-height: 400px;
     }
     
-    .div_form{
+    .div_form {
         overflow-y: auto;
         height: 500px;
         padding: 10px;
     }
     
-    .btn_close{
+    .btn_close {
         margin:auto 2px;
         height: 45px;
     }
     
-    .div_title{
+    .div_title {
         padding-left: 25px;
     }
         
-    .dialog{
+    .dialog {
         width: 100%;
     }
 }
@@ -97,8 +96,6 @@ ion-label {
     font-weight: 500 !important;
 }
 
-
 ion-item {
     margin-top: 5px;
-   
- }
+}

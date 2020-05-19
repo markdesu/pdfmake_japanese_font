@@ -1,35 +1,24 @@
 .welcome-card ion-img {
   max-height: 35vh;
 }
+
 .cd_home {
   padding: 25px;
-  height: 100%;
   margin: auto auto;
+  overflow: auto;
 }
 
-// .footer_title{
-//   font-size: 15px;
-//   text-align: center;
-//   color: #ffffff;
-// }
+.desc {
+  font-size: 12px;
+}
 
-
-.img_home{
+.img_home {
   max-width: 720px;
   width: 100%;
 }
 
-// .iontool{
-//   --background: none !important;
-
-// }
-
-
-// .iontool2{
-//     --background: none;
-//     background-image: url('../../../assets/img/login_bg.png');
-//     background-position: center top;
-//     background-repeat: no-repeat;
-//     background-size: cover;
-// }
-
+@media screen and (min-width: 500px) {
+  .cd_home {
+    height: 100%; 
+  }
+}

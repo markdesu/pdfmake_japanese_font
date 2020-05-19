@@ -14,7 +14,6 @@ import { WeighingService} from './services/weighing.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CreateUserComponent } from './modals/create-user/create-user.component';
 import { EditUserComponent } from './modals/edit-user/edit-user.component';
-// import { MngComusersPageModule } from './pages/padmin/mng-comusers/mng-comusers.module';
 import { CreateCustomerComponent } from './modals/create-customer/create-customer.component';
 import { EditCustomerComponent } from './modals/edit-customer/edit-customer.component';
 
@@ -27,11 +26,14 @@ import { FormsModule,  ReactiveFormsModule} from '@angular/forms';
 import { MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatIconModule} from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { SelectProviderComponent } from './modals/select-provider/select-provider.component';
 
 
 @NgModule({
-  declarations: [AppComponent,CreateUserComponent, EditUserComponent, CreateCustomerComponent, EditCustomerComponent],
-  entryComponents: [CreateUserComponent, EditUserComponent, CreateCustomerComponent, EditCustomerComponent],
+  declarations: [AppComponent,CreateUserComponent, EditUserComponent, CreateCustomerComponent, EditCustomerComponent, SelectProviderComponent],
+  entryComponents: [CreateUserComponent, EditUserComponent, CreateCustomerComponent, EditCustomerComponent, SelectProviderComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot({scrollAssist: false}),
@@ -46,14 +48,12 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatFormFieldModule,
     MatTableModule,
     MatIconModule,
-    MatDialogModule
-  
-
+    MatDialogModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     StatusBar,
-    SplashScreen,Keyboard,
-    
+    SplashScreen, Keyboard,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
     {
       provide: HTTP_INTERCEPTORS,

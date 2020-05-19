@@ -1,64 +1,63 @@
 <ion-header>
     <ion-toolbar>
-      <ion-title>管理用船別集計</ion-title>
-          <ion-buttons slot="start">
-                <ion-back-button defaultHref="/generate-report"></ion-back-button>
-            </ion-buttons>
+        <ion-title>管理用船別集計</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/generate-report"></ion-back-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
   
 <ion-content>
-    
-  <div class="div_content">
-      <div class="div_resultmenu">
-          <label class="lbl_param"><b>日付範囲: </b> {{from_date}} - {{to_date}}</label>
-          <br>
-          <label class="lbl_param"><b>納入業者: </b> {{vendor_name}}</label>
-          <label class="lbl_param"><b>  船名: </b> {{ship_name}}</label>
-          <br>
-          <label class="lbl_result">{{lblResult}}</label>
-          <ion-button  class="btn_download" fill="outline" [hidden]="hide_btndl" size="small" (click)="downloadCSV()"> <ion-icon name="download" slot="start"></ion-icon>このデータを CSV で保存</ion-button>     
-          <div class="div_toggle">
-              <label class="lbl_show">合計のみ表示 </label>
-              <ion-toggle [(ngModel)]="total_only"></ion-toggle>
-          </div>
-      </div>
-      <div class="div_tblcont">
-          <table class="tbl_result" border="1">  
-              <tr>         
-                  <th>グループ</th> <!-- Group -->             
-                  <th>正味重量</th>  <!-- Net Weight -->
-                  <th>品名</th>     <!-- Product name -->  
-                  <th>検収重量</th>  <!-- Total Weight -->                 
-              </tr>
-              <ng-container  border="1" *ngFor="let groups of result">
-                  <tr [hidden]="total_only">
-                      <td class="td_sub" colspan="14">{{groups.group_name}}</td>
-                  </tr>
-                  <tr [hidden]="total_only" *ngFor="let sub_val of groups.items">
-                      <td colspan="2"></td>
-                      <td>{{sub_val.product_name}}</td> 
-                      <td>{{sub_val.weight}}</td>
-                  </tr>               
-                  <tr class="tr_subvTotal">
-                      <td class="td_sub">{{groups.group_name}}計</td>    
-                      <td>{{groups.netweight_total | number}}</td> 
-                      <td></td> 
-                      <td>{{groups.weight_total | number}}</td>                                 
-                  </tr>
-                  <tr>
-                      <td colspan="4"></td>               
-                  </tr>
-              </ng-container>
-           
-              <tr class="td_total">
-                  <td class="td_vtotalname">合計</td>
-                  <td>{{ntotal | number}}</td>
-                  <td></td>
-                  <td>{{wtotal | number}}</td>
-              </tr> 
-          </table>
-      </div>
-  </div>  
+    <div class="div_content">
+        <div class="div_resultmenu">
+            <label class="lbl_param"><b>日付範囲: </b> {{from_date}} - {{to_date}}</label>
+            <br>
+            <label class="lbl_param"><b>納入業者: </b> {{vendor_name}}</label>
+            <label class="lbl_param"><b>  船名: </b> {{ship_name}}</label>
+            <br>
+            <label class="lbl_result">{{lblResult}}</label>
+            <ion-button  class="btn_download" fill="outline" [hidden]="hide_btndl" size="small" (click)="downloadCSV()"> <ion-icon name="download" slot="start"></ion-icon>このデータを CSV で保存</ion-button>     
+            <ion-button  class="btn_download" fill="outline" [hidden]="hide_btndl" size="small" (click)="exportPDF()"> <ion-icon name="download" slot="start"></ion-icon>PDFにエクスポート</ion-button>       
+            <div class="div_toggle">
+                <label class="lbl_show">合計のみ表示 </label>
+                <ion-toggle [(ngModel)]="total_only"></ion-toggle>
+            </div>
+        </div>
+        <div class="div_tblcont">
+            <table class="tbl_result" border="1">  
+                <tr>         
+                    <th>グループ</th> <!-- Group -->             
+                    <th>正味重量</th>  <!-- Net Weight -->
+                    <th>品名</th>     <!-- Product name -->  
+                    <th>検収重量</th>  <!-- Total Weight -->                 
+                </tr>
+                <ng-container  border="1" *ngFor="let groups of result">
+                    <tr [hidden]="total_only">
+                        <td class="td_sub" colspan="14">{{groups.group_name}}</td>
+                    </tr>
+                    <tr [hidden]="total_only" *ngFor="let sub_val of groups.items">
+                        <td colspan="2"></td>
+                        <td>{{sub_val.product_name}}</td> 
+                        <td>{{sub_val.weight}}</td>
+                    </tr>               
+                    <tr class="tr_subvTotal">
+                        <td class="td_sub">{{groups.group_name}}計</td>    
+                        <td>{{groups.netweight_total | number}}</td> 
+                        <td></td> 
+                        <td>{{groups.weight_total | number}}</td>                                 
+                    </tr>
+                    <tr>
+                        <td colspan="4"></td>               
+                    </tr>
+                </ng-container>
+                <tr class="td_total">
+                    <td class="td_vtotalname">合計</td>
+                    <td>{{ntotal | number}}</td>
+                    <td></td>
+                    <td>{{wtotal | number}}</td>
+                </tr> 
+            </table>
+        </div>
+    </div>  
 </ion-content>
    

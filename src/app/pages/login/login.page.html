@@ -6,22 +6,22 @@
 
 <ion-content>
     <div class="login_content">
-        <ion-card class="login_card" [hidden]="!MobileBrowser">
+        <ion-card class="login_card" *ngIf="MobileBrowser" style= "background: url('/assets/img/login_bgm_2.png') no-repeat ; background-size: cover; background-color: #ffffff36;">
                 <ion-card-header class="login_card_header">
-                    <div style="text-align: center; width: 100%; margin: 10px auto;"(click)="redirect()">
-                        <img style="width: auto; height: 50px; margin: 0px auto;"  alt="Funadumi.net Logo" src="/assets/img/logo1.png">
+                    <div class="div_redirect" (click)="redirect()">
+                        <img style="width: auto; height: 50px; margin: 0px auto;"  alt="Funadumi.net Logo" src="/assets/img/logo1_1.png">
                         <label style="font-size: 35px; color : white">船積みネット</label>
                     </div>
                 </ion-card-header>
                 <ion-card-content class="card_content">
-                    <div style="min-height: 50px; text-align: center;">
+                    <div style="min-height: 30px; text-align: center;">
                         <b class="login_status" >{{loginStatus}}</b>
                     </div>
                     <form name="form2" (ngSubmit)="loginUser()">
                         <div class="custom_div">
                             <ion-item>
-                                    <ion-label position="floating">ログインID</ion-label>
-                                    <ion-input  type="text"  [(ngModel)]="username" name="username"></ion-input>
+                                <ion-label position="floating">ログインID</ion-label>
+                                <ion-input type="text"  [(ngModel)]="username" name="username"></ion-input>
                             </ion-item>
                             <ion-item>
                                 <ion-label position="floating">パスワード</ion-label>
@@ -31,18 +31,18 @@
                         <br>
                         <div margin-vertical text-center>
                             <button  type="submit" hidden></button> 
-                            
                             <ion-button ion-button id="btn-confirm" expand="block" color="light" (click)="loginUser()">
-                                    <ion-icon name="unlock" slot="start">
-                                    </ion-icon><b>ログイン</b>
-                            </ion-button>
+                                <ion-icon name="unlock" slot="start"></ion-icon>
+                                <b>ログイン</b>
+                            </ion-button><br>
+                            <label class="f_password" (click)="reissuePass()">パスワードを再発行</label>
                         </div>
                      </form> 
                 </ion-card-content>
         </ion-card>    
-        <ion-card class="login_card2" [hidden]="MobileBrowser">
+        <ion-card class="login_card2" *ngIf="!MobileBrowser">
             <div class="card2_div">                      
-                <div class="card2_div1"></div>
+                <div class="card2_div1" style="background: url('/assets/img/login_bg3_4.png') no-repeat ; background-size: cover;"></div>
                 <div  class="card2_div2">
                     <div style="min-height: 50px;">
                         <b class="login_status" >{{loginStatus}}</b>
@@ -60,9 +60,11 @@
                         <div margin-vertical text-center>
                             <button  type="submit" hidden></button> 
                             <ion-button ion-button id="btn-confirm-mobile" expand="block" color="light" (click)="loginUser()">
-                                    <ion-icon name="unlock" slot="start">
-                                    </ion-icon><b>ログイン</b>
+                                <ion-icon name="unlock" slot="start">
+                                </ion-icon><b>ログイン</b>
                             </ion-button>
+                            <br>
+                            <label class="f_password" (click)="reissuePass()">パスワードを再発行</label>
                         </div>
                     </form> 
                 </div>    
@@ -71,7 +73,7 @@
     </div>
 </ion-content>
 <ion-footer>
-        <div class="div_footer">
-             <ion-title class="footer_title">日光ソフトウェアを搭載</ion-title>
-        </div>
- </ion-footer> 
+    <div class="div_footer">
+            <ion-title class="footer_title">日興ソフトウェアが開発</ion-title>
+    </div>
+</ion-footer> 

@@ -1,9 +1,10 @@
 .div_tbl {
     padding: 15px;
     text-align: center;
+    padding-top: 0px;
 }
 
-.div_tblhandler{
+.div_tblhandler {
     width: 100%;
     min-height: 380px;
     max-height: 400px;
@@ -18,34 +19,65 @@
     border:solid 1px #848484;
 }
 
-.tbl_logs td{
+.tbl_logs td {
     padding:5px;
     border:solid 1px #848484;
+    font-size: 13px;
 }
 
-.tbl_logs th{
+.tbl_logs th {
     padding-top: 5px;
     padding-bottom: 5px;
     background-color: #496271;
     color: #ffffff;
+    font-size: 13px;
 }
 
-.div_action{
+.div_action {
     text-align: left;
     padding: 5px;
+    font-size: 10px;
 }
 
-.card_cont{
+.card_cont {
     margin: 10px auto;
     max-width: 500px;
     min-height: 400px;
 }
 
-.card_header {
-    padding:10px 15px !important;
+.header {
+    height: 100px;
 }
 
-.btn_download{
+.card_header {
+    padding:10px 15px !important;
+    padding-bottom: 0px;
+}
+
+.btn_download {
     float: right;
     margin-left: 5px;
+}
+
+.btn_refresh {
+    vertical-align: middle;
+    float :right;
+    margin-left: 5px;
+}
+
+.lbl_status {
+   color: #9d3b3b;
+}
+
+.td_center {
+   text-align: center;
+}
+
+@media screen and (min-width: 500px) {
+    
+    .card_cont {
+        box-shadow: 0px 1px 3px 2px #c8c8c866;
+        border-radius: 4px;
+    }
+        
 }

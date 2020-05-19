@@ -1,8 +1,8 @@
 <div class="dialog">
     <div class="div_title">
         <label class="lbl_title" >ユーザーの作成</label>  
-        <ion-button  class="btn_close" fill="clear"    color="light" (click)="close()" >
-                <ion-icon name="close-circle" slot="icon-only"></ion-icon>
+        <ion-button  class="btn_close" fill="clear" color="light" (click)="close()" >
+            <ion-icon name="close-circle" slot="icon-only"></ion-icon>
         </ion-button>  
     </div>
       
@@ -28,14 +28,15 @@
             </ion-item>
             
             <ion-item  *ngIf="!data.ins_form">
-                <ion-checkbox [(ngModel)]="is_admin" ></ion-checkbox><label style="margin: auto 10px">管理者</label>
+                <ion-checkbox [(ngModel)]="is_admin"></ion-checkbox><label style="margin: auto 10px">管理者</label>
             </ion-item>
 
             <ion-item  *ngIf="data.ins_mng && !data.ins_form">                           
                 <ion-checkbox [(ngModel)]="is_inspector"></ion-checkbox><label style="margin: auto 10px">検査官</label> 
-            </ion-item>              
+            </ion-item>            
+              
             <div margin-vertical text-center>
-                <ion-button   id="btn-confirm"   (click)="createUser()">
+                <ion-button   id="btn-confirm" (click)="createUser()">
                     <ion-icon name="person-add" slot="start"></ion-icon>ユーザーの追加
                 </ion-button>
             </div>          
@@ -43,18 +44,4 @@
     </div>
 </div>
 
-
 <!-- Comment Area Below -->
-<!-- <ion-item>
-    <ion-label position="floating">パスワード</ion-label>
-    <ion-input type="password" id="input-amount" [(ngModel)]="create_data.password"></ion-input>
-</ion-item>
-
-<ion-item>
-    <ion-label position="floating" wrap-text>パスワードの再入力</ion-label>
-    <ion-input type="password" id="input-amount" [(ngModel)]="create_data.vpassword"></ion-input>
-</ion-item> -->
-
-<!-- <ion-button  class="btn_action" color="warning" (click)="close()" >
-    <ion-icon name="close-circle" slot="start"></ion-icon> 閉じる
-</ion-button> -->

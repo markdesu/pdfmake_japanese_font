@@ -6,7 +6,6 @@
 .div_resultmenu {
     width: 100%;
     margin: auto auto;
-    // min-width: 600px;
     max-width: 1035px;
 }
 
@@ -48,14 +47,6 @@ td {
     text-align: left;
 }
 
-// .tr_vname {
-//     background-color: #bae4fd81;
-//     font-size: 15px;
-// }
-
-// .tr_vname td {
-//     text-align: left;
-// }
 .tr_subvTotal td {
     border-left:  none;
     border-right:  transparent;
@@ -84,15 +75,7 @@ td {
 
 .td_numbers {
     padding-right: 20px;
-
 }
-
-
-// .tr_vtotal {
-//     background: #95fd1585;
-//     text-align: right;  
-//     font-weight: bold;
-// }
 
 .td_lbltotal {
     text-align: left;
@@ -104,20 +87,24 @@ td {
     padding-right: 5px;
 }
 
+.div_colors {
+    display: inline;   
+    padding-top: 5px; 
+    vertical-align: middle; 
+    margin-left: 5px;
+}
 
 
 // table over all Total /////////////////////////////////////////
 
 .tbl_total {
     width: 100%;    
-    // min-width: 600px;
     margin: 10px auto;
     max-width: 1035px;
 }
 
 .tbl_total th {
     color: #ffffff;
-
     background-color: #7c7c7c;
 }
 
@@ -149,7 +136,6 @@ td {
     font-size: 12px;
 }
 
-
 .lbl_double {
     font-size: 9px; 
     display:inline-block; 
@@ -157,15 +143,16 @@ td {
     width: 20px;
 }
 
-
-
+.lbl_nashi {
+    font-size: 12px; 
+    margin-left: 3px; 
+    vertical-align: middle;
+}
 
 ion-toggle {
     vertical-align: middle;
     zoom: 0.6;
 }
-
-
 
 
 // Add Color on columns for readability//////////////////////////
@@ -202,7 +189,6 @@ ion-toggle {
     
     .tr_vname {
         font-size: 11px;
-     
     }
     
     .lbl_show {
@@ -216,13 +202,10 @@ ion-toggle {
     
     .div_tblcont {
         padding: 0px;
-      
     }
+    
     .tbl_result {
-
         min-width: 550px;
-      
-        
     }
     
 }

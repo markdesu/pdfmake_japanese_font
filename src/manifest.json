@@ -1,0 +1,25 @@
+{
+  "name": "funadumi.net",
+  "short_name": "Funadumi",
+  "theme_color": "#1976d2",
+  "background_color": "#fafafa",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "assets/img/shipping_net_icon1.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/img/shipping_net_icon2.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/img/shipping_net_icon3.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }]
+}

@@ -1,0 +1,92 @@
+.div_buttons {
+    width: 300px;
+    height: 80px;
+    margin: 5px 10px;
+    padding-top:10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    text-align: left;
+    display: inline-block;
+    cursor: pointer;
+    border: solid #c4c4c4 .5px;
+    border-radius: 6px;
+}
+
+.div_actions {
+    text-align: center;
+    max-width: 970px;
+}
+
+.img {
+    width: 50px;
+    image-rendering: -moz-crisp-edges; /* Firefox */
+    image-rendering: -o-crisp-edges;   /* Opera */
+    image-rendering: -webkit-optimize-contrast;/* Webkit (non-standard naming) */
+    image-rendering: crisp-edges;
+}
+
+.img_con {
+    width: 70px;
+    height: 65px;
+    padding-top:5px;
+    padding-left: 2px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.div_label {
+    height: 65px;
+    width:145px;
+    padding-top:10px;
+    vertical-align: top;
+    display:inline-block;
+    cursor: pointer;
+    text-align: left;
+}
+
+.div_count {
+    height: 65px;
+    width:70px;
+    vertical-align: top;
+    display:inline-block;
+    padding-top: 15px;
+    text-align: center;
+    cursor: pointer;
+    text-align: left;
+}
+
+.lbl_count2 {
+    font-size: 25px;
+    font-weight: 400;
+    color: #028700;
+}
+
+.lbl_count {
+    font-size: 25px;
+    font-weight: 400;
+    color: #dba437;
+}
+
+@media screen and (min-width: 500px) {
+    
+    .div_actions {
+        text-align: left;
+        margin-left: 15px;
+    }
+    
+    .header {
+        margin-left: 15px;
+    }  
+    
+    .div_buttons:hover {
+        background: #e7f0fb;
+        box-shadow: 1px 3px #c3c3c3;
+    }
+  }
+  
+  .div_buttons:active {
+    background: #c1d1e4;
+    box-shadow: 1px 3px #c3c3c3;
+   
+}
+

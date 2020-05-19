@@ -5,9 +5,7 @@ import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 const reportURL = environment.api_address + "/api/report";
-const httpOptions = {
-  headers: new HttpHeaders({'Content-Type':'application/json'})
-};
+const httpOptions = {headers: new HttpHeaders({'Content-Type':'application/json'})};
 
 @Injectable({
   providedIn: 'root'
@@ -17,41 +15,37 @@ export class ReportService {
 
   constructor(private http: HttpClient) { }
   
-  
-  getTotalResult(data): Observable<any>{
+  getTotalResult(data): Observable<any> {
     return this.http.post(reportURL+ '/adminoverallreport',data,httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
   
-  getAdminShipReport(data): Observable<any>{
+  getAdminShipReport(data): Observable<any> {
     return this.http.post(reportURL+ '/adminshipreport',data,httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
    
-  getAdminLedgerReport(data): Observable<any>{
+  getAdminLedgerReport(data): Observable<any> {
     return this.http.post(reportURL+ '/adminledgerreport',data,httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
   
-  
-  
-  getShipAggregateReport(data): Observable<any>{
+  getShipAggregateReport(data): Observable<any> {
     return this.http.post(reportURL+ '/shipaggregate',data,httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
    }
-  
+
    
-  getShipAggregateListReport(data): Observable<any>{
+  getShipAggregateListReport(data): Observable<any> {
   return this.http.post(reportURL+ '/shipaggregatelist',data,httpOptions).pipe(
     map(this.extractData),
     catchError(this.handleError));
   }
   
-
   
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -73,7 +67,7 @@ export class ReportService {
     return body || { };
   }
   
-  formatterDBDate(selected_date: Date){
+  formatterDBDate(selected_date: Date) {
     var day = selected_date.getDate().toString();
     var month = (selected_date.getMonth() + 1).toString();
     var year = selected_date.getFullYear().toString();

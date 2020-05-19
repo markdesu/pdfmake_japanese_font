@@ -22,7 +22,6 @@
     overflow-x:auto;
 }
 
-
 .div_autocom {
     text-align: left;
     padding: 0;
@@ -80,7 +79,7 @@ table tr {
 tr.active td {
     background-color:#7ea2be !important;
     color: white;
-  }
+}
 
 
 // Buttons, Labels, Inputs /////////////////
@@ -94,12 +93,11 @@ tr.active td {
     min-width: 110px;
 }
 
-.btni_action{
+.btni_action {
     font-size: 10px;
     --padding-start: 10px;
     --padding-end: 10px;
 }
-
 
 @media screen and (max-width: 630px) {
     

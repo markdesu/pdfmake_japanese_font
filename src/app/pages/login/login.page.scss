@@ -2,7 +2,6 @@
 .login_content {
     height: 100%;
     overflow: auto;
-    background: linear-gradient(rgba(255, 255, 255, 0.237), rgba(0, 191, 255, 0.4) );
     background-size: cover;
 }
 
@@ -43,17 +42,14 @@
     height: 100%;
     margin: auto auto;
     border-radius: 2px;
-    background: url('../../../assets/img/login_bgm.png') no-repeat ;
-    background-size: cover;
-    background-color: #ffffff36;
     min-height: 500px;
 }
   
-.card_content{
+.card_content { 
     margin: auto auto;
     max-width: 400px;
     padding-bottom: 25px; 
-  }
+}
 
 
 //Card for desktop browser
@@ -66,7 +62,6 @@
     border-radius: 2px;
     background-color: #ffffff;
 }
-  
 
 .card2_div {
     width: 800px;
@@ -78,8 +73,6 @@
     height: 400px;
     display: inline-block;
     vertical-align: top;
-    background: url('../../../assets/img/login_bg3.png') no-repeat ;
-    background-size: cover;
 }
 
 .card2_div2{
@@ -99,7 +92,18 @@
     border-radius: 2px;
 }
 
-
 .title{
     cursor: pointer;
+}
+
+.div_redirect {
+    text-align: center; 
+    width: 100%; 
+    margin: 10px auto;
+}
+
+.f_password{
+    text-decoration: underline;
+    display: block;
+    color: #5b8db9;
 }

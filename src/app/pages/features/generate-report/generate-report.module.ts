@@ -6,7 +6,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { IonicModule } from '@ionic/angular';
 
 import { GenerateReportPage } from './generate-report.page';
-import { MatInputModule } from '../../../../../node_modules/@angular/material';
+import { MatInputModule, MatDatepickerModule, MatNativeDateModule, MatFormFieldModule } from '../../../../../node_modules/@angular/material';
 
 const routes: Routes = [
   {
@@ -22,6 +22,10 @@ const routes: Routes = [
     ReactiveFormsModule,
     IonicModule,
     MatAutocompleteModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatInputModule,
     RouterModule.forChild(routes)
   ],

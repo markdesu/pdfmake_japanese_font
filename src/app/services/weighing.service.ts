@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpErrorResponse,HttpInterceptor,HttpRequest, HttpHandler,HttpEvent, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpInterceptor, HttpRequest, HttpHandler, HttpEvent} from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
@@ -18,11 +18,12 @@ const masterUrl = environment.api_address + "/api/shipmst";
 const checkerUrl = environment.api_address + "/api/checker";
 const verifyUrl = environment.api_address + "/api/verifytoken";
 const reportURL = environment.api_address + "/api/report";
+
 @Injectable({
   providedIn: 'root'
 })
 
-export class WeighingService implements HttpInterceptor{
+export class WeighingService implements HttpInterceptor {
 
   constructor(private http: HttpClient) { }
   
@@ -31,18 +32,16 @@ export class WeighingService implements HttpInterceptor{
     const sessionData = localStorage.getItem('Session');
     var session = 'XXXXXXXXXXXXXXXXXXXXXXXXXX';
     var mytoken = 'XXXXXXXXXXXXXXXXXXXXXXXXXX';
+    
     if(sessionData !== null){
-      
       var bytes  = CryptoJS.AES.decrypt(sessionData.toString(), '123');
       var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
       session = sha1(JSON.stringify(decryptedData)) || '';
     }
-
    
-    if(idToken !== null){
+    if(idToken !== null) {
       mytoken=idToken
     }
-    
     
     const nheaders = new HttpHeaders({
       'Session':  session,
@@ -54,46 +53,43 @@ export class WeighingService implements HttpInterceptor{
     return next.handle(newRequest);
   }
    
-  getWeighing(id,provider_id): Observable<any>{
+  getWeighing(id,provider_id): Observable<any> {
     return this.http.get(weighingUrl+'/gw/' + id + '/' + provider_id).pipe(
-        map(this.extractData),
-        catchError(this.handleError));
+      map(this.extractData),
+      catchError(this.handleError));
   } 
   
-  getNextRecord(id,provider_id): Observable<any>{
+  getNextRecord(id,provider_id): Observable<any> {
     return this.http.get(weighingUrl+ '/nav/' + id + '/' + provider_id).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
      
-  getWeighingDetails(id): Observable<any>{
+  getWeighingDetails(id): Observable<any> {
     return this.http.get(weighingUrl+ '/wd/' +id).pipe(
-    map(this.extractData),
-    catchError(this.handleError));
+      map(this.extractData),
+      catchError(this.handleError));
   }
   
-  updateWeighing(data): Observable<any>{
+  updateWeighing(data): Observable<any> {
     return this.http.post(weighingUrl + '/update',data,httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
-    
   }
   
-  createWDetails(data): Observable<any>{
-    // console.log(data);
+  createWDetails(data): Observable<any> {
     return this.http.post(weighingUrl+ '/create/wd',data, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
-    
   }
 
-  updateWeighingDetails(data): Observable<any>{
+  updateWeighingDetails(data): Observable<any> {
     return this.http.post(weighingUrl + '/update/wd',data,httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError)); 
   }
     
-  createInspectionLog(data): Observable<any>{
+  createInspectionLog(data): Observable<any> {
     var d = new Date,
     datetoday = [d.getFullYear(),
               d.getMonth()+1,
@@ -107,130 +103,128 @@ export class WeighingService implements HttpInterceptor{
     return this.http.post(weighingUrl+ '/inspectionlog',data, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
-  
   }
   
-  getIncVehicles(provider): Observable<any>{
+  getIncVehicles(provider): Observable<any> {
     var date = this.formatterDBDate(new Date());
     return this.http.get(weighingUrl+ '/vehicles/' + provider + '/' + date).pipe(
       map(this.extractData),
       catchError(this.handleError));
   } 
     
-  getInspectionLogs(inspector_id): Observable<any>{
+  getInspectionLogs(inspector_id): Observable<any> {
     return this.http.get(weighingUrl+ '/inspectionlog/' + inspector_id).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
   
-  TokenValidity():  Observable<any>{
+  TokenValidity():  Observable<any> {
     return this.http.get(verifyUrl).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
 
-  
   // Checking /////////////////////////////////////////////////////////////////////////////
    
-  checkAccessCode(id): Observable<any>{
+  checkAccessCode(id): Observable<any> {
     return this.http.get(accessUrl + '/' + id).pipe(
       map(this.extractData),
       catchError(this.handleError)); 
   }
 
-  checkWeighing(provider_id,weighing_date, weighing_no): Observable<any>{
+  checkWeighing(provider_id,weighing_date, weighing_no): Observable<any> {
     return this.http.get(checkerUrl+'/check/' + weighing_no + '/' +provider_id + '/' + weighing_date).pipe(
-        map(this.extractData),
-        catchError(this.handleError));
+      map(this.extractData),
+      catchError(this.handleError));
   }
    
-  checkWeighing_id(id,provider_id): Observable<any>{
+  checkWeighing_id(id,provider_id): Observable<any> {
     return this.http.get(checkerUrl+'/check/' + id + '/' +provider_id).pipe(
-        map(this.extractData),
-        catchError(this.handleError));
+      map(this.extractData),
+      catchError(this.handleError));
   }
   
-  checkShipTrader(ship_code,vendor_code,provider_id): Observable<any>{
+  checkShipTrader(ship_code,vendor_code,provider_id): Observable<any> {
     return this.http.get(checkerUrl+'/check/shiptrader/' + ship_code + '/' +  vendor_code + '/' + provider_id).pipe(
-        map(this.extractData),
-        catchError(this.handleError));
+      map(this.extractData),
+      catchError(this.handleError));
   }
-  
-  
   
 
   //Master Data Service/////////////////////////////////////////////////////////////////////  
   
-  getItems(provider): Observable<any>{
+  getItems(provider): Observable<any> {
     return this.http.get(masterUrl+ '/m/items/' + provider).pipe(
       map(this.extractData),
     catchError(this.handleError));
-    
   }
   
-  getVendors(provider): Observable<any>{
+  getVendors(provider): Observable<any> {
     return this.http.get(masterUrl+ '/m/vendors/' + provider).pipe(
       map(this.extractData),
     catchError(this.handleError));
-    
   }
   
-  getCustomers(): Observable<any>{
+  getCustomers(): Observable<any> {
     return this.http.get(masterUrl+ '/m/customers').pipe(
       map(this.extractData),
     catchError(this.handleError));
-    
   }
   
-  getInspectors(provider): Observable<any>{
-    return this.http.get(masterUrl+ '/m/inspectors/'+provider).pipe(
+  getInspectors(provider): Observable<any> {
+    return this.http.get(masterUrl+ '/m/inspectors/'+ provider).pipe(
       map(this.extractData),
     catchError(this.handleError));
   }
   
-  getShipVendors(provider,vendor_code,fdate,tdate): Observable<any>{
+  getShipInspectors(provider,ship_code): Observable<any> {
+    return this.http.get(masterUrl+ '/m/shipinspectors/'+ provider  + '/' + ship_code).pipe(
+      map(this.extractData),
+    catchError(this.handleError));
+  }
+  
+  getShipVendors(provider,vendor_code,fdate,tdate): Observable<any> {
     return this.http.get(masterUrl+ '/m/shipvendor/' + provider + '/' + vendor_code + '/' + fdate + '/' + tdate).pipe(
       map(this.extractData),
     catchError(this.handleError));
-    
   }
   
-  getAllShips(provider,fdate,tdate): Observable<any>{
+  getAllShips(provider,fdate,tdate): Observable<any> {
     return this.http.get(masterUrl+ '/m/ships/' + provider + '/' + fdate + '/' + tdate).pipe(
       map(this.extractData),
     catchError(this.handleError));
   }
   
-  getPerShipVendors(provider,ship_code): Observable<any>{
+  getPerShipVendors(provider,ship_code): Observable<any> {
     return this.http.get(masterUrl+ '/m/pershipvendors/' + provider + '/' + ship_code).pipe(
       map(this.extractData),
     catchError(this.handleError));
-    
   }
     
-  getRelatedSubvendors(provider,vendor_code,fdate,tdate): Observable<any>{
+  getRelatedSubvendors(provider,vendor_code,fdate,tdate): Observable<any> {
     return this.http.get(masterUrl+ '/m/relsubvendor/' + provider + '/' + vendor_code + '/' + fdate + '/' + tdate).pipe(
       map(this.extractData),
     catchError(this.handleError));
-    
   }
   
-  getProviders():Observable <any>{
+  getProviders():Observable <any> {
     return this.http.get(masterUrl+ '/m/provider').pipe(
       map(this.extractData),
     catchError(this.handleError));
-    
   }
   
-  getProviderDetails(provider):Observable <any>{
+  getProviderDetails(provider):Observable <any> {
     return this.http.get(masterUrl+ '/m/provider/' + provider).pipe(
       map(this.extractData),
     catchError(this.handleError));
-    
+  }
+  
+  getDashbordCounter(inspector, provider):Observable <any> {
+    return this.http.get(weighingUrl+ '/dash/' + inspector+ '/' + provider).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
   }
   // Master Data Update
-  
- 
   
   
   private handleError(error: HttpErrorResponse) {
@@ -253,7 +247,7 @@ export class WeighingService implements HttpInterceptor{
     return body || { };
   }
   
-  formatterDBDate(selected_date: Date){
+  formatterDBDate(selected_date: Date) {
     var day = selected_date.getDate().toString();
     var month = (selected_date.getMonth() + 1).toString();
     var year = selected_date.getFullYear().toString();
@@ -261,7 +255,6 @@ export class WeighingService implements HttpInterceptor{
     (month.length == 1) && (month = '0' + month);
   
     var formatted_date= year +'' + month+''+day;
-  
     return formatted_date;
   }
 }

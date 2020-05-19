@@ -1,0 +1,30 @@
+{
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "Funadumi",
+      "installMode": "prefetch",
+      "resources": {
+        "files": [
+          "/favicon.ico",
+          "/index.html",
+          "/*.css",
+          "/*.js"
+        ]
+      }
+    }, {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/assets/**",
+          "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
+        ]
+      }
+    }
+  ],
+  "appData": {
+    "changelog": "新しいバージョンが利用可能です。"
+  }
+}

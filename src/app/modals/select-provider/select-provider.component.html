@@ -1,0 +1,9 @@
+<div class="div_select">
+    <div class="div_cont">
+        <ng-container *ngFor="let dt of data" border="1" >                 
+            <ion-button  class="btn_providers" color="light" (click)="close(dt.provider_id)">{{dt.provider_name}}</ion-button>
+            <br>
+        </ng-container> 
+        <ion-button  class="btn_close"  (click)="close('close')">閉じる</ion-button>
+    </div>
+</div>       

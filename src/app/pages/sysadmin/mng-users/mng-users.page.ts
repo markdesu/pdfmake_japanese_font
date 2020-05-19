@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
-
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import item1 from '../../../model/item1.model';
 import { ManagementService } from '../../../services/management.service';
 import { MatDialog, MatDialogConfig } from '../../../../../node_modules/@angular/material';
-
 import { CreateUserComponent } from '../../../modals/create-user/create-user.component';
 import { EditUserComponent } from '../../../modals/edit-user/edit-user.component';
 import { AlertController, Platform } from '../../../../../node_modules/@ionic/angular';
@@ -16,9 +14,9 @@ import { Router } from '../../../../../node_modules/@angular/router';
 @Component({
   selector: 'app-mng-users',
   templateUrl: './mng-users.page.html',
-  styleUrls: ['./mng-users.page.scss'],
-  
+  styleUrls: ['./mng-users.page.scss']
 })
+
 export class MngUsersPage implements OnInit {
 
   constructor(private management_API: ManagementService,
@@ -30,13 +28,11 @@ export class MngUsersPage implements OnInit {
   
   displayedColumns: string[] = ['username','name','email', 'is_admin', 'is_inspector', 'action'];
   dataSource = [];
-
   customer_list: item1[] = [];
-  // arr = []
   optionCtrl = new FormControl();
   filteredOption: Observable<any>;
   sel_customer = '';
-  
+
   private customer_id;
 
   selectedRowID;
@@ -49,18 +45,18 @@ export class MngUsersPage implements OnInit {
   }
   
   ngOnInit() {
-    
+     this.MobileBrowser = this.isMobileBrowser();
   }
   
+
   ionViewDidEnter() {
-    this.MobileBrowser = this.isMobileBrowser();
-    this.management_API.getCustomers().subscribe(res =>{
-      if(res){
-        if(res.status == '401'){
+    this.management_API.getCustomers().subscribe(res => {
+      if(res) {
+        if(res.status == '401') {
             this.RequestAuth();
             return;
         }
-        if(res.data){
+        if(res.data) {
           this.customer_list = res.data;
           this.filteredOption = this.optionCtrl.valueChanges
           .pipe(
@@ -74,12 +70,12 @@ export class MngUsersPage implements OnInit {
   
   execGetUSer() {
     for (let index = 0; index < this.customer_list.length; index++) {
-      if(this.optionCtrl.value == this.customer_list[index].name){
+      if(this.optionCtrl.value == this.customer_list[index].name) {
         this.customer_id = this.customer_list[index].id;
       }
     }
     
-    if(!this.customer_id){
+    if(!this.customer_id) {
       return;
     }
     this.getUsers(this.customer_id);
@@ -87,8 +83,8 @@ export class MngUsersPage implements OnInit {
   
   getUsers(customer_id) {
     this.management_API.getCustomerUsers(customer_id).subscribe(res => {
-      if(res){
-        if(res.status == '401'){
+      if(res) {
+        if(res.status == '401') {
             this.RequestAuth();
             return;
         }
@@ -142,12 +138,12 @@ export class MngUsersPage implements OnInit {
     
     this.management_API.updateUser(user_data).subscribe(res=>{
       if(res){
-        if(res.status == '401'){
-            this.RequestAuth();
-            return;
+        if(res.status == '401') {
+          this.RequestAuth();
+          return;
         }
-        if(res.data){
-          if(res.data['affectedRows'] > 0){
+        if(res.data) {
+          if(res.data['affectedRows'] > 0) {
             this.execGetUSer();
             this.clearSelection();
           }
@@ -157,19 +153,19 @@ export class MngUsersPage implements OnInit {
   }
   
   deleteUser() {
-    if(!this.selectedRow){
+    if(!this.selectedRow) {
       return;
     }
-    this.presentAlertConfirm().then( res =>{
-      if(res){
-        this.management_API.deleteUser(this.selectedRow.id).subscribe(res2 =>{
+    this.presentAlertConfirm().then( res => {
+      if(res) {
+        this.management_API.deleteUser(this.selectedRow.id).subscribe(res2 => {
           if(res2){
-            if(res2.status == '401'){
+            if(res2.status == '401') {
                 this.RequestAuth();
                 return;
             }
-            if(res2.data){
-              if(res2.data['affectedRows']){
+            if(res2.data) {
+              if(res2.data['affectedRows']) {
                 this.execGetUSer();
                 this.clearSelection();
               }
@@ -213,7 +209,7 @@ export class MngUsersPage implements OnInit {
   }
   
   showEditDailog() {
-    if(!this.selectedRow){
+    if(!this.selectedRow) {
       return;
     }
     
@@ -222,15 +218,15 @@ export class MngUsersPage implements OnInit {
     var inspector;
     const dialogConfig = new MatDialogConfig();
 
-    if(selected_user.is_admin){
+    if(selected_user.is_admin) {
       admin = true;
-    }else{
+    } else {
       admin = false;
     }
     
-    if(selected_user.is_surveyor){
+    if(selected_user.is_surveyor) {
       inspector = true;
-    }else{
+    } else {
       inspector = false;
     }
 
@@ -249,14 +245,14 @@ export class MngUsersPage implements OnInit {
                           action: 0,
                           ins_mng: true};
                           
-    var dailogref = this.Dialog.open(EditUserComponent,dialogConfig);
+    var dailogref = this.Dialog.open(EditUserComponent, dialogConfig);
   
-    dailogref.afterClosed().subscribe(res =>{   
-        if(res){
-            if(res.action === 1){
-              this.updateUser(res);
-            }
-        }    
+    dailogref.afterClosed().subscribe(res => {   
+      if(res) {
+        if(res.action === 1) {
+          this.updateUser(res);
+        }
+      }    
     });
   }
  
@@ -288,7 +284,7 @@ export class MngUsersPage implements OnInit {
      return choice;
   }
    
-  async presentAlertOK(title,message, cssclass) {
+  async presentAlertOK(title, message, cssclass) {
     var  choice = false;
     const alert = await this.alertController.create({
       header: title,
@@ -320,6 +316,6 @@ export class MngUsersPage implements OnInit {
     var currentURL = '/serviceadmin/mng-users';
     this.authGuard.logout();
     this.router.navigate(['/serviceadmin/index'], {queryParams : {url:currentURL}});
-
   }
+  
 }

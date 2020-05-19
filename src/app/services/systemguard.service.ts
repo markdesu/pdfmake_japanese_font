@@ -22,12 +22,12 @@ export class SystemguardService implements CanActivate{
   canActivate(route: ActivatedRouteSnapshot,state : RouterStateSnapshot):boolean {
     
     if(this.checkLoginUser()) {
-          if(this.authGuard.user_type == 'system_admin') {
-              return true;
-          } else {
-              this.router.navigate(['/404']);
-              return false;
-          }
+      if(this.authGuard.user_type == 'system_admin') {
+          return true;
+      } else {
+          this.router.navigate(['/404']);
+          return false;
+      }
     } else {
         this.router.navigate(['/serviceadmin/index']);
         return false;
@@ -37,7 +37,6 @@ export class SystemguardService implements CanActivate{
   checkLoginUser() {
     if (this.authGuard.isAuthenticated) {
       return true;
-      
     } else {
       return false;
     }

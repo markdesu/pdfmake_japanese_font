@@ -6,31 +6,34 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content >
+<ion-content>
   <ion-card class="cd_home">  
-      <ion-card-header>
-          <ion-card-subtitle>始める</ion-card-subtitle>
-          <ion-card-title>出荷アプリへようこそ<img class="img_home" alt="funadumi site" src="assets/img/banner2.png"></ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-          <p>Shipping.netと統合され、出荷アプリは、計量の詳細の簡単なエンコーディングと表示を提供しています。<br>出荷ヤード操作用に設計されています。</p>
-      </ion-card-content>
-      <ion-button fill="clear"> 
-        <ion-icon name="document" slot="start"></ion-icon> 
-        <a style="text-decoration: none;"href="/assets/pdfviewer.html" target="_blank">ユーザーズマニュアル</a>
-      </ion-button>     
-      <ion-button fill="clear" routerLink="/inspection/login" [hidden]="authguard.isAuthenticated"> 
-        <ion-icon name="clipboard" slot="start"></ion-icon>ヤード検査サービス
-      </ion-button>
-      <ion-button fill="clear" routerLink="/weighing" *ngIf="authguard.user_type == 'admin'"> 
-        <ion-icon name="cube" slot="start"></ion-icon>管理用実績集計
-      </ion-button>
-      <ion-button fill="clear" routerLink="/qrscanner">
-        <ion-icon name="qr-scanner" slot="start"></ion-icon>QR スキャンを開始
-      </ion-button>          
+    <ion-card-header>
+      <ion-card-subtitle>始める</ion-card-subtitle>
+      <ion-card-title>船積みネットへようこそ<img class="img_home" alt="funadumi site" src="assets/img/banner2.png"></ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p class="desc">このサービスは、有限会社ニッコーソフトウェアの船積み計量システムと連動し、計量データを各業者様に提供するものです。
+        <br> 全てのデータは、各計量業者様により提供されています。
+        <br>このサービスをご利用になりたい業者様、及びデータの提供をしていただける業者様は、<a href="http://nikkosoftware.com/">有限会社ニッコーソフトウェア</a>
+        までご連絡ください。バージョン 2.10.
+    </ion-card-content>
+    <ion-button fill="clear"> 
+      <ion-icon name="information-circle" slot="start"></ion-icon> 
+      <a style="text-decoration: none;"href="/assets/pdfviewer.html" target="_blank">ユーザーズマニュアル</a>
+    </ion-button>     
+    <ion-button fill="clear" routerLink="/login" [hidden]="authguard.isAuthenticated"> 
+      <ion-icon name="unlock" slot="start"></ion-icon>ログイン
+    </ion-button>
+    <ion-button fill="clear" routerLink="/weighing" *ngIf="authguard.user_type == 'admin'"> 
+      <ion-icon name="cube" slot="start"></ion-icon>管理用実績集計
+    </ion-button>
   </ion-card>
 </ion-content>
 
 
 
 <!--.............. Comment Area Below ............. -->
+<!-- <ion-button fill="clear" *ngIf="authguard.is_inspector" routerLink="/qrscanner">
+  <ion-icon name="qr-scanner" slot="start"></ion-icon>QR スキャンを開始
+</ion-button> -->

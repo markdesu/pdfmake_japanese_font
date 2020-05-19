@@ -6,7 +6,6 @@
 .div_resultmenu {
     width: 100%;
     margin: auto auto;
-    // min-width: 600px;
     max-width: 1035px;
 }
 
@@ -124,23 +123,17 @@ td {
     font-size: 12px;
 }
 
-
-
-
-
-
 ion-toggle {
     vertical-align: middle;
     zoom: 0.6;
 }
 
 
-
-
 // Add Color on columns for readability//////////////////////////
 .td_gross {
     background: #bef3c285;
 }
+
 .td_tare {
     background: #f1f3be85;
 }
@@ -163,7 +156,7 @@ ion-toggle {
 }
 
 
-@media screen and (max-width: 630px)  {
+@media screen and (max-width: 630px) {
 
     tr {
         font-size: 9px; 
@@ -171,7 +164,6 @@ ion-toggle {
     
     .tr_vname {
         font-size: 11px;
-     
     }
     
     .lbl_show {
@@ -185,13 +177,10 @@ ion-toggle {
     
     .div_tblcont {
         padding: 0px;
-      
     }
+    
     .tbl_result {
-
-        min-width: 300px;
-      
-        
+        min-width: 300px;        
     }
     
 }

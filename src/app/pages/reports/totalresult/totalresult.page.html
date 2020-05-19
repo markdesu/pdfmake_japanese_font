@@ -1,150 +1,145 @@
 <ion-header>
     <ion-toolbar>
-      <ion-title>管理用実績集計</ion-title>
-          <ion-buttons slot="start">
-                <ion-back-button defaultHref="/generate-report"></ion-back-button>
-            </ion-buttons>
+      <!-- <ion-title>管理用実績集計</ion-title> -->
+        <ion-title>業者別明細表</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/generate-report"></ion-back-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
   
 <ion-content>
-  
-  <div class="div_content">
-      <div class="div_resultmenu">
-          <label class="lbl_param"><b>日付範囲: </b> {{from_date}} - {{to_date}}</label>
-          <br>
-          <label class="lbl_param"><b>納入業者: </b> {{vendor_name}}</label>
-          <label class="lbl_param"><b>   船名: </b> {{ship_name}}</label>
-          <br>
-          <label class="lbl_result">{{lblResult}}</label>
-          <ion-button  class="btn_download" fill="outline" [hidden]="hide_btndl" size="small" (click)="downloadCSV()"> <ion-icon name="download" slot="start"></ion-icon>このデータを CSV で保存</ion-button>     
-          <ion-button  class="btn_download" fill="outline" [hidden]="hide_btndl" size="small" (click)="viewPDF('a')"> <ion-icon name="download" slot="start"></ion-icon>領収書伝票 PDF</ion-button>     
-          <div class="div_toggle">
-              <label class="lbl_show">合計のみ表示 </label>
-              <ion-toggle [(ngModel)]="total_only" (click)="toggle_main()"></ion-toggle>
-          </div>
-      </div>
-      <img id='imgToExport' src='/assets/img/pipe_logo.png' style='display:none'/> 
-      <img id='imgToExport2' src='/assets/img/pipe_logo2.png' style='display:none'/> 
-      <div class="div_tblcont">
-          <table class="tbl_result" *ngFor="let vendor of result;  let y = index;" border="1">
-                <tr class="tr_vname">
-                  <td colspan="14">全て <input type="checkbox"  [(ngModel)]="vendor.selected" (change)="selectAll(vendor.selected,vendor.vendor)" style="margin-right: 10px;">  {{vendor.vendor_name}}</td>
-                </tr>
-                <tr>
-                    <!-- Subvedor -->
-                    <th>代納業者</th>
-                    <!-- Car No -->
-                    <th>車番</th>
-                    <!-- Group -->
-                    <th>グループ</th>
-                    <!-- Total Weight -->
-                    <th>総重</th>
-                    <!-- Own Weight -->
-                    <th>自重</th>
-                    <!-- Net -->
-                    <th>正味</th>
-                    <!-- Dust -->
-                    <th>ダスト</th>
-                    <!-- Real Net -->
-                    <th>実正味</th>
-                    <!-- Rank 1 -->
-                    <th>ランク１</th>
-                    <!-- Rank 2 -->
-                    <th>ランク２</th>
-                    <!-- Rank 3 -->
-                    <th>ランク３</th>
-                    <!-- Rank 4 -->
-                    <th>ランク４</th>
-                    <!-- Date and time -->
-                    <th>日時</th>
-                    <!-- Document -->
-                    <th>伝票No.</th>
-                    
-                </tr>
-        
-                <ng-container  *ngFor="let sub of vendor.values  let x = index;" border="1" >
-                    <tr [hidden]="sub.hidden" (click)="toggle_sub(y,x)">
-                        <td class="td_sub" colspan="14">{{sub.subvendor_name}}</td>
-                      
+    <div class="div_content">
+        <div class="div_resultmenu">
+            <label class="lbl_param"><b>日付範囲: </b> {{from_date}} - {{to_date}}</label>
+            <br>
+            <label class="lbl_param"><b>納入業者: </b> {{vendor_name}}</label>
+            <label class="lbl_param"><b>   船名: </b> {{ship_name}}</label>
+            <br>
+            <label class="lbl_result">{{lblResult}}</label>
+            <ion-button  class="btn_download" fill="outline" [hidden]="hide_btndl" size="small" (click)="downloadCSV()"> <ion-icon name="download" slot="start"></ion-icon>このデータを CSV で保存</ion-button>     
+            <ion-button  class="btn_download" fill="outline" [hidden]="hide_btndl" size="small" (click)="viewPDF()"> <ion-icon name="download" slot="start"></ion-icon>計量証明書PDF</ion-button>   
+            <ion-button  class="btn_download" fill="outline" [hidden]="hide_btndl" size="small" (click)="exportPDF()"> <ion-icon name="download" slot="start"></ion-icon>業者別明細書PDF</ion-button>       
+            <div class="div_colors">
+                <input type="checkbox"  [(ngModel)]="old_report" style="vertical-align: middle;"><label class="lbl_nashi">(古い形式のCSV) </label>
+                <input type="checkbox"  [(ngModel)]="no_color" style="vertical-align: middle;"><label class="lbl_nashi"> (色なし)</label>
+            </div>
+            <div class="div_toggle">
+                <label class="lbl_show">合計のみ表示 </label>
+                <ion-toggle [(ngModel)]="total_only" (click)="toggle_main()"></ion-toggle>
+            </div>
+        </div>
+        <img id='imgToExport' src='/assets/img/pipe_logo3.png' style='display:none'/> 
+        <img id='imgToExport2' src='/assets/img/pipe_logo5.png' style='display:none'/> 
+        <div class="div_tblcont">
+            <table class="tbl_result" *ngFor="let vendor of result;  let y = index;" border="1">
+                    <tr class="tr_vname">
+                    <td colspan="14">全て <input type="checkbox"  [(ngModel)]="vendor.selected" (change)="selectAll(vendor.selected,vendor.vendor)" style="margin-right: 10px;">  {{vendor.vendor_name}}</td>
                     </tr>
-                    <tr class="tr_sub" [hidden]="sub.hidden" *ngFor="let sub_val of sub.values;" [@changeState] >
-                      <td>
-                          <input type="checkbox"  [(ngModel)]="sub_val.selected">  
-                         <!-- <ion-button   size="small"  color="light" (click)="viewPDF(sub_val)"> 
-                             <ion-icon name="download" slot="icon-only"></ion-icon></ion-button>      -->
-                    </td>
-                      <td>{{sub_val.car_no}}</td> 
-                      <td>{{sub_val.group_name}}</td>
-                      <td class="td_gross">{{sub_val.gross_weight | number}}</td> 
-                      <td class="td_tare">{{sub_val.tare_weight | number}}</td>
-                      <td class="td_net">{{sub_val.net_weight | number}}</td> 
-                      <td class="td_reduce">{{sub_val.reduced_weight | number}}</td>
-                      <td class="td_weight">{{sub_val.weight | number}}</td> 
-                      <td>{{sub_val.rank_1 | number}}</td>
-                      <td>{{sub_val.rank_2 | number}}</td> 
-                      <td>{{sub_val.rank_3 | number}}</td>
-                      <td>{{sub_val.rank_4 | number}}</td> 
-                      <td>{{sub_val.delivery_date}}-{{sub_val.weighing_time}}</td>
-                      <td>{{sub_val.weighing_no}}</td>
+                    <tr>
+                        <!-- Subvedor -->
+                        <th>代納業者</th>
+                        <!-- Car No -->
+                        <th>車番</th>
+                        <!-- Group -->
+                        <th>グループ</th>
+                        <!-- Total Weight -->
+                        <th>総重</th>
+                        <!-- Own Weight -->
+                        <th>自重</th>
+                        <!-- Net -->
+                        <th>正味</th>
+                        <!-- Dust -->
+                        <th>ダスト</th>
+                        <!-- Real Net -->
+                        <th>実正味</th>
+                        <!-- Rank 1 -->
+                        <th>ランク１</th>
+                        <!-- Rank 2 -->
+                        <th>ランク２</th>
+                        <!-- Rank 3 -->
+                        <th>ランク３</th>
+                        <!-- Rank 4 -->
+                        <th>ランク４</th>
+                        <!-- Date and time -->
+                        <th>日時</th>
+                        <!-- Document -->
+                        <th>伝票No.</th>     
                     </tr>
-                    <!-- <ion-toggle checked="sub.hidden"></ion-toggle> -->
-                    <tr class="tr_subvTotal"> 
-                        <td class="td_sub"  colspan="4"  (click)="toggle_sub(y,x)">{{sub.subvendor_name}}計</td>
-                        <!-- <td >{{sub.gross_total | number}}</td> -->
-                        <td>{{sub.unit_count | number}} 台</td>
-                        <!-- <td >{{sub.tare_total | number}}</td> -->
-                        <td>{{sub.net_total | number}}</td>
+            
+                    <ng-container  *ngFor="let sub of vendor.values  let x = index;" border="1">
+                        <tr [hidden]="sub.hidden" (click)="toggle_sub(y,x)">
+                            <td class="td_sub" colspan="14">{{sub.subvendor_name}}</td>
+                        </tr>
+                        <tr class="tr_sub" [hidden]="sub.hidden" *ngFor="let sub_val of sub.values;" [@changeState] >
+                        <td>
+                            <input type="checkbox"  [(ngModel)]="sub_val.selected">  
+                        </td>
+                        <td>{{sub_val.car_no}}</td> 
+                        <td>{{sub_val.group_name}}</td>
+                        <td class="td_gross">{{sub_val.gross_weight | number}}</td> 
+                        <td class="td_tare">{{sub_val.tare_weight | number}}</td>
+                        <td class="td_net">{{sub_val.net_weight | number}}</td> 
+                        <td class="td_reduce">{{sub_val.reduced_weight | number}}</td>
+                        <td class="td_weight">{{sub_val.weight | number}}</td> 
+                        <td>{{sub_val.rank_1 | number}}</td>
+                        <td>{{sub_val.rank_2 | number}}</td> 
+                        <td>{{sub_val.rank_3 | number}}</td>
+                        <td>{{sub_val.rank_4 | number}}</td> 
+                        <td>{{sub_val.delivery_date}}-{{sub_val.weighing_time}}</td>
+                        <td>{{sub_val.weighing_no}}</td>
+                        </tr>
+
+                        <tr class="tr_subvTotal"> 
+                            <td class="td_sub"  colspan="4"  (click)="toggle_sub(y,x)">{{sub.subvendor_name}}計</td>
+                            <td>{{sub.unit_count | number}} 台</td>
+                            <td>{{sub.net_total | number}}</td>
+                            <td> </td>
+                            <td>{{sub.weight_total | number}}</td>
+                            <td >{{sub.r1_total | number}}</td>
+                            <td >{{sub.r2_total | number}}</td>
+                            <td >{{sub.r3_total | number}}</td>
+                            <td >{{sub.r4_total | number}}</td>
+                            <td colspan="2"></td>     
+                        </tr>
+                    </ng-container>
+                    <tr class="tr_vtotal">
+                        <td class="td_vtotalname" colspan="4">{{vendor.vendor_name}}計</td>
+                        <td>{{vendor.vunit_count | number}} 台</td>
+                        <td>{{vendor.vnet_total | number}}</td>
                         <td> </td>
-                        <td>{{sub.weight_total | number}}</td>
-                        <td >{{sub.r1_total | number}}</td>
-                        <td >{{sub.r2_total | number}}</td>
-                        <td >{{sub.r3_total | number}}</td>
-                        <td >{{sub.r4_total | number}}</td>
+                        <td>{{vendor.vweight_total | number}}</td>
+                        <td >{{vendor.vr1_total | number}}</td>
+                        <td >{{vendor.vr2_total | number}}</td>
+                        <td >{{vendor.vr3_total | number}}</td>
+                        <td >{{vendor.vr4_total | number}}</td>
                         <td colspan="2"> </td>
-                        
-                  </tr>
-                </ng-container>
-                <tr class="tr_vtotal">
-                    <td class="td_vtotalname" colspan="4">{{vendor.vendor_name}}計</td>
-                    <td>{{vendor.vunit_count | number}} 台</td>
-                    <!-- <td >{{vendor.vtare_total | number}}</td> -->
-                    <td>{{vendor.vnet_total | number}}</td>
-                    <td> </td>
-                    <td>{{vendor.vweight_total | number}}</td>
-                    <td >{{vendor.vr1_total | number}}</td>
-                    <td >{{vendor.vr2_total | number}}</td>
-                    <td >{{vendor.vr3_total | number}}</td>
-                    <td >{{vendor.vr4_total | number}}</td>
-                    <td colspan="2"> </td>
-                </tr>
-          </table>
-        
-          <table class="tbl_total"  border="1">
+                    </tr>
+            </table>
             
-                <tr border="1">
-                  <th></th>
-                  <th>台数</th>
-                  <th>正味重量</th>
-                  <th>実正味重量</th>
-                  <th>ランク１</th>
-                  <th>ランク２</th>
-                  <th>ランク３</th>
-                  <th>ランク４</th>
-                </tr>
-            
-                <tr border="1">
-                  <td style="text-align: left">全ての納入業者計	</td>
-                  <td>{{unitTotal}}</td>
-                  <td>{{netTotal | number}}</td>
-                  <td>{{weightTotal | number}}</td>
-                  <td>{{r1Total | number}}</td>
-                  <td>{{r2Total | number}}</td>
-                  <td>{{r3Total | number}}</td>
-                  <td>{{r4Total | number}}</td>
-                </tr>   
-          </table>
-      </div>
-  </div>  
+            <table class="tbl_total"  border="1">
+                    <tr border="1">
+                        <th></th>
+                        <th>台数</th>
+                        <th>正味重量</th>
+                        <th>実正味重量</th>
+                        <th>ランク１</th>
+                        <th>ランク２</th>
+                        <th>ランク３</th>
+                        <th>ランク４</th>
+                    </tr>
+                    <tr border="1">
+                        <td style="text-align: left">全ての納入業者計	</td>
+                        <td>{{unitTotal}}</td>
+                        <td>{{netTotal | number}}</td>
+                        <td>{{weightTotal | number}}</td>
+                        <td>{{r1Total | number}}</td>
+                        <td>{{r2Total | number}}</td>
+                        <td>{{r3Total | number}}</td>
+                        <td>{{r4Total | number}}</td>
+                    </tr>   
+            </table>
+        </div>
+    </div>  
 </ion-content>
    

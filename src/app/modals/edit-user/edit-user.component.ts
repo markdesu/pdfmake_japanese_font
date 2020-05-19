@@ -12,6 +12,7 @@ export class EditUserComponent implements OnInit {
 
   lbl_form_title = 'ユーザー情報';
   set_ins_active = false;
+  
   ngOnInit() {
 
     if(this.data.ins_form == true){
@@ -25,26 +26,24 @@ export class EditUserComponent implements OnInit {
   }
   
   save() {
-    if(this.data.ins_form == true){
-        if(this.set_ins_active) {
-          this.data.active = 1;
-        }else{
-          this.data.active = 0;
-        }
+    if(this.data.ins_form == true){ 
+      if(this.set_ins_active) {
+        this.data.active = 1;
+      } else {
+        this.data.active = 0;
+      }
         
-       delete  this.data.ins_form; 
-       delete  this.data.ins_mng; 
+      delete  this.data.ins_form; 
+      delete  this.data.ins_mng; 
     }
  
     this.data.action = 1;
     this.dialogRef.close(this.data);
   }
  
-  close(){
+  close() {
     this.data.action = 0;
     this.dialogRef.close(this.data);
   }
-  
-
 
 }

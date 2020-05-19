@@ -37,14 +37,12 @@ export class EditCustomerComponent implements OnInit {
     this.error_status = '';
     this.hide_error = true;
 
-    if(this.create_data.name == ''){
+    if(this.create_data.name == '') {
       this.showError();
       return false;
-        
     }else{
       return true;    
     }
-    
   }
   
   
@@ -53,21 +51,18 @@ export class EditCustomerComponent implements OnInit {
     this.error_status = '誤り:無効な会社名';
     var x = document.getElementById('create');
     x.scrollTop = 0 ;
-  
   }
   
   close() {
     this.create_data.action = 0;
     this.dialogRef.close(this.create_data);
-    
   }
   
   
-  createCustomer(){
-    if(this.validate()){
+  createCustomer() {
+    if(this.validate()) {
       this.create_data.action = 1;
       this.dialogRef.close(this.create_data);
     }
-  
   }
 }

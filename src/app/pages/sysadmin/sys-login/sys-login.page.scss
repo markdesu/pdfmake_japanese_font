@@ -1,4 +1,4 @@
-.login_content{
+.login_content {
     height: 100%;
 }
 
@@ -15,10 +15,8 @@
 }
   
 .login_card_header {
-  // background-color: #315e96;
   background: linear-gradient(#cb8801,  rgb(198, 163, 103) );
   padding-top:30px;
- 
 }
 
 .login_card_title {
@@ -27,7 +25,6 @@
 
 .login_status {
   color: #fc0101;
-  
 }
 
 .div_chk {
@@ -41,24 +38,20 @@
   margin-right: 10px;
 }
 
-
 #btn-confirm {
   height: 50px;
 }
-
-
 
 
 @media screen and (min-width: 600px) {
     
   .login_card {
       max-width: 600px;
-      // margin-top: 50px;
   }
   
   .login_content {
     padding-top: 50px;
-}
+  }
 
   .card_content {
       margin: auto auto;
@@ -70,37 +63,17 @@
 
 @media screen and (max-width: 600px) {
   
-  .login_card{
+  .login_card {
       width: 100%;
       height: 100%;
   }
-  
 
-  
-  .card_content{
+  .card_content {
       margin: auto auto;
       max-width: 400px;
-   
   }
   
 }
 
 
 // Comment Area.....................................
-
-
-// .div_main {
-//   width:100%;
-//   background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6) ), url('../../assets/bg10.jpg') no-repeat;
-//   background-size: auto;
-//   background-position:center top;
-//   background-attachment: fixed;
-//   height:400px;
-//   overflow: hidden;
-
-// }
-
-   
-// overflow: hidden;
-// background: url('../../../assets/img/login_bg.png') no-repeat ;
-// background-size: cover;

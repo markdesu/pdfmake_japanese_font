@@ -1,45 +1,49 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
     <ion-title>アカウント設定</ion-title>
+    <ion-buttons slot="start" *ngIf="!MobileBrowser">
+        <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-back-button slot="start" *ngIf="MobileBrowser" [routerLink]="backURL" defaultHref="{{backURL}}"></ion-back-button>
+    <ion-buttons slot="end"  *ngIf="MobileBrowser">
+        <ion-menu-button></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
     <div class="div_content">
-        <div id="change_form" class="div_formbody">
-            <ion-label class="lbl_title">パスワードを再設定する</ion-label> 
-            <div class="div_form">        
-              <div class="div_status" [hidden]="!show_error">
-                <label class="lbl_status">{{error_message}}</label>
-              </div>
-                <ion-item class="input_item">             
-                  <ion-label position="floating" class="inputl_lblcustom1">現在のパスワード</ion-label>
-                  <ion-input class="input_custom1 input_custom0" [(ngModel)]="old_pass" type="password"></ion-input>                               
-                </ion-item>
-                
-                <ion-item class="input_item">          
-                  <ion-label position="floating" class="inputl_lblcustom1">新しいパスワード</ion-label>
-                  <ion-input class="input_custom1 input_custom0"  [type]="input_type"  [(ngModel)]="new_pass" ></ion-input>
-                  <ion-icon  class="ibtn" slot="end" name="eye" (click)="showPassword()"></ion-icon>
-                </ion-item>
-                
-                <ion-item  id='v_pass' class="input_item">     
-                    <ion-label position="floating" class="inputl_lblcustom1">新しいパスワード（確認用）</ion-label>
-                    <ion-input  class="input_custom1 input_custom0" [(ngModel)]="new_pass_v" [type]="input_type" ></ion-input>            
-                </ion-item>  
-                  
-                <div class="div_btnaction">
-                  <ion-button  class="btn_action" fill="solid" color="success"   (click)="resetPass()">
-                    <ion-icon slot="start"  name="save"></ion-icon>設定
-                  </ion-button>    
-                </div> 
-                           <!-- <ion-button style="float: right;" fill="clear"></ion-icon></ion-button> -->
-            </div>
-        </div> 
-      
+      <div id="change_form" class="div_formbody">
+        <ion-label class="lbl_title">パスワードを再設定する</ion-label> 
+        <div class="div_form">        
+          <div class="div_status" [hidden]="!show_error">
+            <label class="lbl_status">{{error_message}}</label>
+          </div>
+          
+          <form>
+            <ion-item class="input_item">             
+              <ion-label position="floating" class="inputl_lblcustom1">現在のパスワード</ion-label>
+              <ion-input class="input_custom1 input_custom0"  name="oldpass" [(ngModel)]="old_pass" type="password"></ion-input>                               
+            </ion-item>
+            
+            <ion-item class="input_item">          
+              <ion-label position="floating" class="inputl_lblcustom1">新しいパスワード</ion-label>
+              <ion-input class="input_custom1 input_custom0" name="npass" [type]="input_type"  [(ngModel)]="new_pass" ></ion-input>
+              <ion-icon  class="ibtn" slot="end" name="eye" (click)="showPassword()"></ion-icon>
+            </ion-item>
+            
+            <ion-item  id='v_pass' class="input_item">     
+                <ion-label position="floating" class="inputl_lblcustom1">新しいパスワード（確認用）</ion-label>
+                <ion-input  class="input_custom1 input_custom0"  name="npass2"[(ngModel)]="new_pass_v" [type]="input_type" ></ion-input>            
+            </ion-item>  
+
+            <div class="div_btnaction">
+              <ion-button  class="btn_action" fill="solid" color="success" (click)="resetPass()">設定
+                <ion-icon slot="start"  name="save"></ion-icon>
+              </ion-button>    
+            </div> 
+          </form>
+        </div>
+      </div> 
     </div>
 </ion-content>
